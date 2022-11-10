@@ -32,9 +32,7 @@
   "targets": {
     "index": {
       "includeNodeModules": {
-        "vue": true,
-        "axios": true,
-        "swiper": true
+        "vue": true
       },
       "context": "browser",
       "distDir": "./buildDir",
@@ -46,8 +44,12 @@
   },
   "keywords": [],
   "dependencies": {
-    "@parcel/config-default": "^2.8.0",
-    "@parcel/transformer-js": "^2.8.0",
+    "@vueuse/core": "^9.1.0",
+    "l0k_swap-sdk": "https://github.com/10k-swap/10k_swap-sdk.git#main",
+    "lodash": "^4.17.21",
+    "object-hash": "^3.0.0",
+    "starknet": "3.16.0",
+    "@argent/get-starknet": "^3.0",
     "vue": "^3.2.16"
   },
   "devDependencies": {
@@ -56,15 +58,20 @@
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-typescript": "^7.15.0",
     "@parcel/babylon-walk": "^2.0.0-rc.0",
+    "@parcel/config-default": "^2.8.0",
     "@parcel/transformer-babel": "^2.0.0-rc.0",
     "@parcel/transformer-image": "^2.0.0-rc.0",
+    "@parcel/transformer-js": "^2.8.0",
     "@parcel/transformer-sass": "^2.0.0-rc.0",
+    "@parcel/transformer-typescript-tsc": "^2.8.0",
     "@parcel/transformer-vue": "^2.0.0-rc.0",
     "@rollup/plugin-alias": "^3.1.5",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.0.5",
+    "@types/lodash": "^4.14.188",
+    "@types/object-hash": "^2.2.1",
     "@types/qs": "^6.9.7",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",

@@ -1,1 +1,3 @@
-const a = '1'
+import P from './components/Providers/Providers.vue'
+
+export default P

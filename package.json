@@ -49,6 +49,7 @@
     "lodash": "^4.17.21",
     "object-hash": "^3.0.0",
     "starknet": "3.16.0",
+    "bowser": "^2.11.0",
     "@argent/get-starknet": "^3.0",
     "vue": "^3.2.16"
   },

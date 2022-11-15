@@ -6,6 +6,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 
 export default defineConfig({
   build: {
+    outDir: 'lib',
     lib: {
       entry: resolve(__dirname, './src/index.ts'),
       name: 'Bundle',

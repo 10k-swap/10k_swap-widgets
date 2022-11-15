@@ -36,7 +36,7 @@ export default defineComponent({
         return getDefaultUrl(token.value ?? undefined)
       }
 
-      const url = `./images/coins/${token.value.address}.png`
+      const url = `https://10kswap.com/images/coins/${token.value.address}.png`
       return BADS[url] ? getDefaultUrl(token.value) : url
     })
 

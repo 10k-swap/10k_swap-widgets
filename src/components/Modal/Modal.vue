@@ -1,165 +1,128 @@
 <template>
-  <div
-    v-show="isPopupShow"
-    class="m-popup l0k-swap-modal-container"
-    :class="[hasMask ? 'with-mask' : '', largeRadius ? 'large-radius' : '', position]"
-  >
-    <transition name="m-mask-fade">
-      <div v-show="hasMask && isPopupBoxShow" @click="handelPopupMaskClick" class="m-popup-mask l0k-swap-modal-overlay"></div>
+  <div class="l0k-swap-modal-container" ref="root" v-show="showModal" :class="containerClass">
+    <transition name="l0k-swap-modal-overlay-fade">
+      <div class="l0k-swap-modal-overlay" v-show="shwoOverlay" :ref="(element) => onRef(element, 0)" @click="onOverlayClick" />
     </transition>
-    <m-transition
-      :name="transition"
-      @before-enter="handelPopupTransitionStart"
-      @before-leave="handelPopupTransitionStart"
-      @after-enter="handelPopupTransitionEnd"
-      @after-leave="handelPopupTransitionEnd"
-    >
-      <div
-        v-show="isPopupBoxShow"
-        class="m-popup-box l0k-swap-modal-content"
-        :class="[transition]"
-        :style="{ marginTop: isNumber(top) ? `${top}px` : top }"
-      >
-        <slot name="header" v-if="slots.header"></slot>
-        <ModalHeader v-else :title="title" @dismiss="hidePopupBox" />
-        <div class="l0k-swap-modal-wrap"><slot></slot></div>
+    <Transition :name="transition" @after-enter="onTransitionEnd" @after-leave="onTransitionEnd">
+      <div class="l0k-swap-modal-content" v-show="showModalContent" :ref="(element) => onRef(element, 1)" :class="[transition]" :style="contentStyle">
+        <slot name="header" v-if="slots.header" />
+        <ModalHeader v-else :title="title" @dismiss="onDismiss" />
+        <div class="l0k-swap-modal-wrap"><slot /></div>
       </div>
-    </m-transition>
+    </Transition>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, toRefs, watch, getCurrentInstance, onMounted } from 'vue'
-import Transition from '../transition/transition.vue'
+import { defineComponent, ref, toRefs, watch, onMounted, ComponentPublicInstance, computed } from 'vue'
 import ModalHeader from './ModalHeader.vue'
-import { props, Props } from './index'
-import { isNumber } from 'lodash'
+import Transition from '../Transition/Transition.vue'
+import { props } from './index'
+import { useContainerClasses, useContentStyle, usePreventScrollEventHandler } from './hooks'
 
 export default defineComponent({
-  name: 'm-popup',
-  components: { ModalHeader, 'm-transition': Transition },
+  components: {
+    ModalHeader,
+    Transition,
+  },
   props: {
     ...props,
   },
-  emits: ['update:modelValue', 'before-hide', 'before-show', 'show', 'hide', 'mask-click'],
-  setup(props: Props, { emit, slots }) {
-    const { modelValue, preventScroll, maskClosable, position, transition, hasMask, appendToBody } = toRefs(props)
+  emits: ['update:modelValue', 'show', 'hide'],
+  setup(props, { emit, slots }) {
+    const { modelValue, preventScroll, maskClosable, position, hasOverlay, appendToBody, top } = toRefs(props)
 
-    const isPopupShow = ref(false)
-    const isPopupBoxShow = ref(false)
+    const showModal = ref(false)
+    const showModalContent = ref(false)
     const isAnimation = ref(false)
-    const largeRadius = ref(false)
+    const elements = ref<Element[]>([])
+    const root = ref<Node>()
 
-    const instanc = getCurrentInstance()
+    const shwoOverlay = computed(() => hasOverlay.value && showModalContent.value)
 
-    onMounted(() => {
-      if (modelValue.value) {
-        showPopupBox()
-      }
-    })
+    const containerClass = useContainerClasses(position)
+    const contentStyle = useContentStyle(top)
 
-    watch(modelValue, (val) => {
-      if (val) {
-        if (isAnimation.value) {
-          setTimeout(() => {
-            showPopupBox()
-          }, 50)
-        } else {
-          showPopupBox()
-        }
-      } else {
-        hidePopupBox()
-      }
-    })
+    const preventScrollEvent = usePreventScrollEventHandler(elements, preventScroll)
 
-    const showPopupBox = () => {
-      if (appendToBody.value) {
-        const el = instanc?.proxy?.$el
-        document.body.appendChild(el)
-      }
-      isPopupShow.value = true
+    const onShowModal = () => {
+      showModal.value = true
       isAnimation.value = true
-      isPopupBoxShow.value = true
-      // eslint-disable-next-line no-undef
-      if (process.env.MAND_ENV === 'test') {
-        handelPopupTransitionStart()
-        handelPopupTransitionEnd()
-      }
-      preventScroll.value && preventScrollEvent(true)
+      showModalContent.value = true
+
+      preventScrollEvent('addEventListener')
     }
-
-    const hidePopupBox = () => {
+    const onDismiss = () => {
       isAnimation.value = true
-      isPopupBoxShow.value = false
-      preventScroll.value && preventScrollEvent(false)
+      showModalContent.value = false
+
       emit('update:modelValue', false)
-      // eslint-disable-next-line no-undef
-      if (process.env.MAND_ENV === 'test') {
-        handelPopupTransitionStart()
-        handelPopupTransitionEnd()
+
+      preventScrollEvent('removeEventListener')
+    }
+    const onRef = (element: ComponentPublicInstance | Element | null, i: number) => {
+      if (element instanceof Element) {
+        elements.value[i] = element
       }
     }
-
-    const preventScrollEvent = (isBind: boolean) => {
-      const el = instanc?.proxy?.$el
-      const handler = isBind ? 'addEventListener' : 'removeEventListener'
-      const masker = el.querySelector('.m-popup-mask')
-      const boxer = el.querySelector('.m-popup-box')
-
-      masker && masker[handler]('touchmove', preventDefault, false)
-      boxer && boxer[handler]('touchmove', preventDefault, false)
-      masker && masker[handler]('scroll', preventDefault, false)
-      boxer && boxer[handler]('scroll', preventDefault, false)
-    }
-
-    const preventDefault = (event: Event) => {
-      event.preventDefault()
-    }
-
-    const handelPopupTransitionStart = () => {
-      if (!isPopupBoxShow.value) {
-        emit('before-hide')
-      } else {
-        emit('before-show')
+    const onOverlayClick = () => {
+      if (maskClosable.value) {
+        onDismiss()
       }
     }
-
-    const handelPopupTransitionEnd = () => {
-      if (!isAnimation.value) {
+    const onTransitionEnd = () => {
+      if (isAnimation.value) {
         return
       }
 
-      if (!isPopupBoxShow.value) {
-        isPopupShow.value = false
-        emit('hide')
-      } else {
+      if (showModalContent.value) {
         emit('show')
+      } else {
+        showModal.value = false
+        emit('hide')
       }
 
       isAnimation.value = false
     }
 
-    const handelPopupMaskClick = () => {
-      if (maskClosable.value) {
-        hidePopupBox()
-        emit('mask-click')
+    watch(modelValue, (newValue) => {
+      if (!newValue) {
+        onDismiss()
+        return
       }
-    }
+
+      if (!isAnimation.value) {
+        onShowModal()
+        return
+      }
+
+      setTimeout(() => onShowModal(), 50)
+    })
+
+    onMounted(() => {
+      if (appendToBody.value && root.value) {
+        document.body.appendChild(root.value)
+      }
+
+      if (modelValue.value) {
+        onShowModal()
+      }
+    })
 
     return {
-      isPopupShow,
-      isPopupBoxShow,
-      hasMask,
-      largeRadius,
-      position,
-      transition,
+      root,
       slots,
+      elements,
+      showModal,
+      shwoOverlay,
+      contentStyle,
+      containerClass,
+      showModalContent,
 
-      handelPopupMaskClick,
-      handelPopupTransitionStart,
-      handelPopupTransitionEnd,
-      hidePopupBox,
-      isNumber,
+      onOverlayClick,
+      onTransitionEnd,
+      onDismiss,
+      onRef,
     }
   },
 })
@@ -168,7 +131,7 @@ export default defineComponent({
 <style lang="scss">
 @import '../../styles/mixin.scss';
 @import '../../styles/index.scss';
-.m-popup {
+.l0k-swap-modal-container {
   @include absolute-pos();
   position: fixed;
   display: flex;
@@ -180,67 +143,49 @@ export default defineComponent({
   &.top {
     flex-direction: column;
     justify-content: flex-start;
-    .m-popup-box {
-      width: 100%;
-    }
   }
   &.bottom {
     flex-direction: column;
     justify-content: flex-end;
-    .m-popup-box {
-      width: 100%;
-    }
   }
   &.left {
     justify-content: flex-start;
-    .m-popup-box {
-      height: 100%;
-    }
   }
   &.right {
     justify-content: flex-end;
-    .m-popup-box {
-      height: 100%;
+  }
+
+  .l0k-swap-modal-content {
+    position: relative;
+    pointer-events: auto;
+    z-index: 2;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    width: 480px;
+    height: fit-content;
+    background: $color-white;
+    border-radius: 20px;
+    margin-bottom: 50px;
+    overflow-y: scroll;
+    @include no-scrollbar;
+
+    @include mobile {
+      width: 335px;
+    }
+    .l0k-swap-modal-wrap {
+      padding: 0 20px 20px 20px;
     }
   }
-  &.inner-popup .m-popup-box {
-    background-color: $color-white;
-    border-radius: 8px 8px 0 0;
-  }
-  &.large-radius.inner-popup .m-popup-box {
-    border-radius: 40px 40px 0 0;
-  }
 }
-.m-popup-mask {
+.l0k-swap-modal-overlay {
   @include absolute-pos();
   position: absolute;
   pointer-events: auto;
   z-index: 1;
   background-color: $color-overlay;
 }
-.m-popup-box {
-  position: relative;
-  pointer-events: auto;
-  z-index: 2;
-  max-width: 100%;
-  max-height: 100%;
-  overflow: auto;
-  width: 480px;
-  height: fit-content;
-  background: $color-white;
-  border-radius: 20px;
-  margin-bottom: 50px;
-  overflow-y: scroll;
-  @include no-scrollbar;
-
-  @include mobile {
-    width: 335px;
-  }
-  .l0k-swap-modal-wrap {
-    padding: 0 20px 20px 20px;
-  }
-}
-.m-mask-fade {
+.l0k-swap-modal-overlay-fade {
   &-enter-from,
   &-leave-to {
     opacity: 0.01;

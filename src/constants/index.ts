@@ -4,7 +4,16 @@ export const CSS_PREFIX = 'l0k-swap'
 
 export const MOBILE_SIZE = 768
 
+// default allowed slippage, in bips
+export const INITIAL_SWAP_ALLOWED_SLIPPAGE = 200
+export const INITIAL_ALLOWED_SLIPPAGE = 200
+
+// 2 days, denominated in seconds
+export const DEFAULT_DEADLINE_FROM_NOW = 60 * 60 * 24 * 2
+
 export const ONE_BIPS = new Percent(JSBI.BigInt(1), JSBI.BigInt(10000))
 export const BIPS_BASE = JSBI.BigInt(10000)
 
 export const ADDRESS_ZORE = '0x0000000000000000000000000000000000000000000000000000000000000000'
+
+export const ESTIMATE_GAS_FREE = JSBI.multiply(JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(15)), JSBI.BigInt(5)) // 0.005 ETH

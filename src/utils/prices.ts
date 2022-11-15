@@ -1,5 +1,5 @@
 import { Fraction, JSBI, Percent, TokenAmount, Trade } from 'l0k_swap-sdk'
-import { Field } from '../providers/SwapStateProvider/types'
+import { Field } from '../providers/SwapStateProvider/model'
 
 // converts a basis points value to a sdk percent
 export function basisPointsToPercent(num: number): Percent {

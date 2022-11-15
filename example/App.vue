@@ -1,11 +1,10 @@
 <template>
-  <div><Index /></div>
+  <Index />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Index from '../dist/index'
-import '../dist/style.css'
+import Index from '../src/index'
 
 export default defineComponent({
   components: {
@@ -15,13 +14,4 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-body {
-  padding: 30%;
-}
-</style>
+<style lang="scss"></style>

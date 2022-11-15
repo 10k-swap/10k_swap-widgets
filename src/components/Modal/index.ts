@@ -1,32 +1,39 @@
 import { PropType } from 'vue'
 
-type PositionType = 'bottom' | 'top' | 'left' | 'right' | 'center'
-type TransitionType = 'm-slide-up' | 'm-slide-down' | 'm-slide-right' | 'm-slide-left' | 'm-zoom' | 'm-fade' | 'm-bounce'
+export type Position = 'bottom' | 'top' | 'left' | 'right' | 'center'
+export type Transition =
+  | 'l0k-swap-slide-up'
+  | 'l0k-swap-slide-down'
+  | 'l0k-swap-slide-right'
+  | 'l0k-swap-slide-left'
+  | 'l0k-swap-zoom'
+  | 'l0k-swap-fade'
+  | 'l0k-swap-bounce'
 
 export const props = {
   position: {
-    type: String as PropType<PositionType>,
+    type: String as PropType<Position>,
     default: 'center',
-    validator(val: PositionType): boolean {
+    validator(val: Position): boolean {
       return ['bottom', 'top', 'left', 'right', 'center'].includes(val)
     },
   },
   transition: {
-    type: String as PropType<TransitionType>,
-    default(props: Props): TransitionType {
+    type: String as PropType<Transition>,
+    default(props: { position: Position }): Transition {
       switch (props.position) {
         case 'bottom':
-          return 'm-slide-up'
+          return 'l0k-swap-slide-up'
         case 'top':
-          return 'm-slide-down'
+          return 'l0k-swap-slide-down'
         case 'left':
-          return 'm-slide-right'
+          return 'l0k-swap-slide-right'
         case 'right':
-          return 'm-slide-left'
+          return 'l0k-swap-slide-left'
         case 'center':
-          return 'm-zoom'
+          return 'l0k-swap-zoom'
         default:
-          return 'm-fade' // fade/fade-bounce/fade-slide/fade-zoom
+          return 'l0k-swap-fade' // fade/fade-bounce/fade-slide/fade-zoom
       }
     },
   },
@@ -38,7 +45,7 @@ export const props = {
     type: Boolean,
     default: false,
   },
-  hasMask: {
+  hasOverlay: {
     type: Boolean,
     default: true,
   },
@@ -48,7 +55,7 @@ export const props = {
   },
   appendToBody: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   title: {
     type: String,
@@ -57,14 +64,4 @@ export const props = {
     type: [Number, String],
     default: 200,
   },
-}
-
-export interface Props {
-  position: PositionType
-  transition: TransitionType
-  preventScroll: boolean
-  modelValue: boolean
-  hasMask: boolean
-  maskClosable: boolean
-  appendToBody: boolean
 }

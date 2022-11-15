@@ -2,7 +2,6 @@
 import { defineComponent, h, Transition, Slots } from 'vue'
 
 export default defineComponent({
-  name: 'm-transition',
   render(proxy: { $attrs: Record<string, unknown>; $slots: Slots }) {
     return h(Transition, proxy.$attrs, proxy.$slots)
   },
@@ -10,7 +9,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.m-bounce {
+.l0k-swap-bounce {
   &-enter-active {
     animation: bounce-in 300ms linear;
   }
@@ -19,7 +18,7 @@ export default defineComponent({
   }
 }
 
-.m-zoom {
+.l0k-swap-zoom {
   &-enter-from,
   &-leave-to {
     opacity: 0.01;
@@ -33,7 +32,7 @@ export default defineComponent({
   }
 }
 
-.m-punch {
+.l0k-swap-punch {
   &-enter-from,
   &-leave-to {
     opacity: 0.01;
@@ -47,7 +46,7 @@ export default defineComponent({
   }
 }
 
-.m-slide-up {
+.l0k-swap-slide-up {
   &-enter-from,
   &-leave-to {
     transform: translate3d(0, 100%, 0);
@@ -60,7 +59,7 @@ export default defineComponent({
   }
 }
 
-.m-slide-right {
+.l0k-swap-slide-right {
   &-enter-from,
   &-leave-to {
     transform: translate3d(-100%, 0, 0);
@@ -72,7 +71,7 @@ export default defineComponent({
     transition: transform 250ms cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 }
-.m-slide-left {
+.l0k-swap-slide-left {
   &-enter-from,
   &-leave-to {
     transform: translate3d(100%, 0, 0);
@@ -85,7 +84,7 @@ export default defineComponent({
   }
 }
 
-.m-slide-down {
+.l0k-swap-slide-down {
   &-enter-from,
   &-leave-to {
     transform: translate3d(0, -100%, 0);
@@ -98,7 +97,7 @@ export default defineComponent({
   }
 }
 
-.m-fade {
+.l0k-swap-fade {
   &-enter-from,
   &-leave-to {
     opacity: 0.01;
@@ -111,7 +110,7 @@ export default defineComponent({
   }
 }
 
-.m-fade-up {
+.l0k-swap-fade-up {
   &-enter-from,
   &-leave-to {
     opacity: 0.01;
@@ -125,7 +124,7 @@ export default defineComponent({
   }
 }
 
-.m-fade-down {
+.l0k-swap-fade-down {
   &-enter-from,
   &-leave-to {
     opacity: 0.01;
@@ -139,7 +138,7 @@ export default defineComponent({
   }
 }
 
-.m-fade-right {
+.l0k-swap-fade-right {
   &-enter-from,
   &-leave-to {
     opacity: 0.01 transform translate3d(-20%, 0, 0);
@@ -152,7 +151,7 @@ export default defineComponent({
   }
 }
 
-.m-fade-left {
+.l0k-swap-fade-left {
   &-enter-from,
   &-leave-to {
     opacity: 0.01;
@@ -166,7 +165,7 @@ export default defineComponent({
   }
 }
 
-.m-fly {
+.l0k-swap-fly {
   &-enter-active {
     animation: fly-in 600ms;
     animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);

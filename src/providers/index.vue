@@ -2,7 +2,9 @@
   <StarknetProvider :connectors="connectors">
     <ModalStateProvider>
       <SlippageToleranceProvider>
-        <slot></slot>
+        <SwapStateProvider>
+          <slot></slot>
+        </SwapStateProvider>
       </SlippageToleranceProvider>
     </ModalStateProvider>
   </StarknetProvider>
@@ -14,7 +16,7 @@ import { getInstalledInjectedConnectors } from '../starknet/connectors'
 import StarknetProvider from '../starknet/providers/index.vue'
 import { ModalStateProvider } from './ModalStateProvider/ModalStateProvider'
 import { SlippageToleranceProvider } from './SlippageToleranceProvider/SlippageToleranceProvider'
-// import { TransactionRefreshData } from '../../starknet/providers/transaction'
+import { SwapStateProvider } from './SwapStateProvider/SwapStateProvider'
 
 const connectors = getInstalledInjectedConnectors()
 
@@ -23,6 +25,7 @@ export default defineComponent({
     StarknetProvider,
     ModalStateProvider,
     SlippageToleranceProvider,
+    SwapStateProvider,
   },
   setup() {
     return {

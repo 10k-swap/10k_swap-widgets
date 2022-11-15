@@ -34,9 +34,9 @@
 <script lang="ts">
 import { computed, defineComponent, PropType, toRefs } from 'vue'
 import Modal from '../Modal/Modal.vue'
-import TradePrice from './TradePrice.vue'
+import TradePrice from '../TradePrice/TradePrice.vue'
 import TokenLogo from '../TokenLogo/TokenLogo'
-import AdvancedSwapDetails from './AdvancedSwapDetails.vue'
+import AdvancedSwapDetails from '../AdvancedSwapDetails/AdvancedSwapDetails.vue'
 import { DownIcon } from '../Svg/index'
 import Text from '../Text/Text.vue'
 import Button from '../Button/Button'

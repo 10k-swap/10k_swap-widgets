@@ -13,9 +13,8 @@
   },
   "homepage": "https://github.com/10k-swap/-10k_swap-widgets#readme",
   "main": "src/index.ts",
-  "module": "dist/bundle.js",
-  "typings": "dist/index.d.ts",
-  "type": "module",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "source": "./example/main.ts",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
@@ -32,6 +31,7 @@
   "keywords": [],
   "dependencies": {
     "@argent/get-starknet": "^3.0",
+    "@ethersproject/units": "^5.6.1",
     "@vueuse/core": "^9.1.0",
     "bowser": "^2.11.0",
     "buffer": "^6.0.3",
@@ -39,10 +39,10 @@
     "l0k_swap-sdk": "https://github.com/10k-swap/10k_swap-sdk.git#main",
     "lodash": "^4.17.21",
     "object-hash": "^3.0.0",
-    "starknet": "3.16.0"
+    "starknet": "3.16.0",
+    "vue3-popper": "^1.5.0"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "^8.3.3",
     "@types/lodash": "^4.14.188",
     "@types/node": "^18.11.9",
     "@types/object-hash": "^2.2.1",
@@ -55,10 +55,6 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.7.0",
     "prettier": "^2.7.1",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.77.0",
-    "rollup-plugin-dts": "^4.2.2",
-    "rollup-plugin-terser": "^7.0.2",
     "sass": "^1.42.1",
     "typescript": "^4.4.3",
     "vite": "^3.2.3",

@@ -11,7 +11,6 @@ export const ModalStateProvider = defineComponent({
       showSlippageToleranceSettingsModal: false,
       showWalletModal: false,
     })
-
     const toggleModal = (modal: ModalType, value: boolean) => {
       switch (modal) {
         case 'account':

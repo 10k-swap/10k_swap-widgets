@@ -16,9 +16,7 @@
     <div class="balance">
       <Text :color="'description-text'" :size="'mini'">
         balance:
-        {{
-            currencyBalance === null ? 'loading...' : currencyBalance?.toSignificant() ?? '-',
-        }}
+        {{ isNull(currencyBalance) ? 'loading...' : currencyBalance?.toSignificant() ?? '-' }}
       </Text>
       <span class="max" @click="() => onMax && onMax(currencyBalance ?? undefined)" v-if="onMax && currencyBalance"> Max </span>
     </div>
@@ -30,6 +28,7 @@ import { Token, TokenAmount } from 'l0k_swap-sdk'
 import TokenSelector from '../TokenSelector/TokenSelector.vue'
 import TokenLogo from '../TokenLogo/TokenLogo'
 import Text from '../Text/Text.vue'
+import { isNull } from 'lodash'
 
 export default defineComponent({
   props: {
@@ -87,6 +86,7 @@ export default defineComponent({
     return {
       onSelect,
       onInput,
+      isNull,
 
       slots: context.slots,
       typedValue,

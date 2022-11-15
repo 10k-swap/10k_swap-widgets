@@ -25,9 +25,7 @@
       <TradePrice class="trade-price" :price="trade?.executionPrice" />
       <AdvancedSwapDetails :trade="trade" />
       <div class="confirm">
-        <Button :type="'primary'" bold @click="onConfirm">
-          Confirm
-        </Button>
+        <Button :type="'primary'" bold @click="onConfirm"> Confirm </Button>
       </div>
     </div>
   </Modal>

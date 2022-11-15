@@ -10,10 +10,11 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"],
-    "skipLibCheck": true,
-    "experimentalDecorators": true,
-    "jsxImportSource": "preact"
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*.ts",
@@ -24,5 +25,10 @@
     "example/**/*.d.ts",
     "example/**/*.tsx",
     "example/**/*.vue"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
   ]
 }

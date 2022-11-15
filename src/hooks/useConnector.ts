@@ -1,22 +1,22 @@
-import { computed, nextTick, ref, watch } from 'vue'
+import { nextTick, ref, watch } from 'vue'
+import { useModalStateManager } from '../providers/ModalStateProvider/hooks'
 import { Connector } from '../starknet/connectors'
 import { InjectedConnectorOptions } from '../starknet/connectors/injected'
 import { UserRejectedRequestError } from '../starknet/errors'
 import { useStarknet } from '../starknet/providers/starknet'
-import { useModalStore } from '../state'
 import useArgentXRejectCallback from './useArgentXRejectCallback'
 
-export default function useConnector() {
+export default function useConnector(): {
+  onConnect: (connector: Connector<InjectedConnectorOptions>) => Promise<void>
+} {
   const connectError = ref<Error>()
 
-  const store = useModalStore()
+  const [{ showConnectingModal }, toggleModal] = useModalStateManager()
 
   const {
     state: { account },
     connect,
   } = useStarknet()
-
-  const showConnectingModal = computed(() => store.showConnectingModal)
 
   watch(connectError, (newErr) => {
     if (!newErr) {
@@ -24,11 +24,11 @@ export default function useConnector() {
     }
 
     if (showConnectingModal.value) {
-      store.toggleConnectingModal(false)
+      toggleModal('connecting', false)
     }
 
     if (newErr instanceof UserRejectedRequestError) {
-      store.toggleConnectRejectModal(true)
+      toggleModal('connectReject', true)
     }
   })
 
@@ -37,7 +37,7 @@ export default function useConnector() {
       return
     }
     if (showConnectingModal.value) {
-      store.toggleConnectingModal(false)
+      toggleModal('connecting', false)
     }
     if (connectError.value) {
       return
@@ -54,15 +54,15 @@ export default function useConnector() {
       const ready = await connector.ready()
 
       if (!ready) {
-        store.toggleConnectingModal(true)
+        toggleModal('connecting', true)
       }
 
       await connect(connector)
 
       nextTick(() => {
-        store.toggleConnectingModal(false)
+        toggleModal('connecting', false)
         if (account.value) {
-          store.toggleAccountModal(true)
+          toggleModal('account', true)
         }
       })
     } catch (error) {

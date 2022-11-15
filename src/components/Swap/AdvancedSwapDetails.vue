@@ -37,10 +37,10 @@
 import { computed, defineComponent, PropType, toRefs } from 'vue'
 import { Trade, TradeType } from 'l0k_swap-sdk'
 import { ONE_BIPS } from '../../constants/index'
-import { useUserSwapSlippageTolerance } from '../../state/slippageToleranceSettings/hooks'
 import { Field } from '../../providers/SwapStateProvider/types'
 import { computeSlippageAdjustedAmounts } from '../../utils/prices'
 import Text from '../Text/Text.vue'
+import { useUserSwapSlippageTolerance } from '../../providers/SlippageToleranceProvider/hooks'
 
 export default defineComponent({
   props: {

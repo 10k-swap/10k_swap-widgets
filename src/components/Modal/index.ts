@@ -1,14 +1,7 @@
 import { PropType } from 'vue'
 
 type PositionType = 'bottom' | 'top' | 'left' | 'right' | 'center'
-type TransitionType =
-  | 'm-slide-up'
-  | 'm-slide-down'
-  | 'm-slide-right'
-  | 'm-slide-left'
-  | 'm-zoom'
-  | 'm-fade'
-  | 'm-bounce'
+type TransitionType = 'm-slide-up' | 'm-slide-down' | 'm-slide-right' | 'm-slide-left' | 'm-zoom' | 'm-fade' | 'm-bounce'
 
 export const props = {
   position: {
@@ -58,7 +51,7 @@ export const props = {
     default: false,
   },
   title: {
-    type: String
+    type: String,
   },
   top: {
     type: [Number, String],

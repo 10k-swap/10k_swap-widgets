@@ -1,14 +1,17 @@
 <template>
-  <div>124r</div>
+  <div><Index /></div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Index from '../dist/index'
+import '../dist/style.css'
 
 export default defineComponent({
-  setup() {
-    
+  components: {
+    Index,
   },
+  setup() {},
 })
 </script>
 

@@ -1,16 +1,12 @@
 <template>
   <Modal v-model="showModal">
     <div class="l0k-swap-connect-reject-modal">
-      <Text class="title" bold :size="'md'" :color="'red'">
-        Error Connectir
-      </Text>
+      <Text class="title" bold :size="'md'" :color="'red'"> Error Connectir </Text>
       <div class="card">
         <Text :size="'small'" :color="'secondary-text'">
           The connection attempt failed.Please click try again and follow the steps to connect in your wallet.
         </Text>
-        <Button class="retry" :type="'primary'" bold @click="onRetry">
-          Try Again
-        </Button>
+        <Button class="retry" :type="'primary'" bold @click="onRetry"> Try Again </Button>
       </div>
     </div>
   </Modal>
@@ -21,8 +17,7 @@ import { computed, defineComponent } from 'vue'
 import Modal from '../Modal/Modal.vue'
 import Text from '../Text/Text.vue'
 import Button from '../Button/Button'
-import { useModalStore } from '../../state'
-import { useOpenWalletModal } from '../../state/modal/hooks'
+import { useModalStateManager, useOpenWalletModal } from '../../providers/ModalStateProvider/hooks'
 
 export default defineComponent({
   components: {
@@ -31,13 +26,13 @@ export default defineComponent({
     Button,
   },
   setup() {
-    const store = useModalStore()
+    const [{ showConnectRejectModal }, toggleModal] = useModalStateManager()
     const openWalletModal = useOpenWalletModal()
 
     const showModal = computed({
-      get: () => store.showConnectRejectModal,
+      get: () => showConnectRejectModal.value,
       set(newValue) {
-        store.toggleConnectRejectModal(newValue)
+        toggleModal('connectReject', newValue)
       },
     })
 

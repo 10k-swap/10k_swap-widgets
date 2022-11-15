@@ -14,7 +14,12 @@
       @after-enter="handelPopupTransitionEnd"
       @after-leave="handelPopupTransitionEnd"
     >
-      <div v-show="isPopupBoxShow" class="m-popup-box l0k-swap-modal-content" :class="[transition]" :style="{ marginTop: isNumber(top) ? `${top}px` : top }">
+      <div
+        v-show="isPopupBoxShow"
+        class="m-popup-box l0k-swap-modal-content"
+        :class="[transition]"
+        :style="{ marginTop: isNumber(top) ? `${top}px` : top }"
+      >
         <slot name="header" v-if="slots.header"></slot>
         <ModalHeader v-else :title="title" @dismiss="hidePopupBox" />
         <div class="l0k-swap-modal-wrap"><slot></slot></div>
@@ -26,14 +31,13 @@
 <script lang="ts">
 import { defineComponent, ref, toRefs, watch, getCurrentInstance, onMounted } from 'vue'
 import Transition from '../transition/transition.vue'
+import ModalHeader from './ModalHeader.vue'
 import { props, Props } from './index'
 import { isNumber } from 'lodash'
 
 export default defineComponent({
   name: 'm-popup',
-  components: {
-    'm-transition': Transition,
-  },
+  components: { ModalHeader, 'm-transition': Transition },
   props: {
     ...props,
   },
@@ -76,6 +80,7 @@ export default defineComponent({
       isPopupShow.value = true
       isAnimation.value = true
       isPopupBoxShow.value = true
+      // eslint-disable-next-line no-undef
       if (process.env.MAND_ENV === 'test') {
         handelPopupTransitionStart()
         handelPopupTransitionEnd()
@@ -88,6 +93,7 @@ export default defineComponent({
       isPopupBoxShow.value = false
       preventScroll.value && preventScrollEvent(false)
       emit('update:modelValue', false)
+      // eslint-disable-next-line no-undef
       if (process.env.MAND_ENV === 'test') {
         handelPopupTransitionStart()
         handelPopupTransitionEnd()
@@ -153,7 +159,7 @@ export default defineComponent({
       handelPopupTransitionStart,
       handelPopupTransitionEnd,
       hidePopupBox,
-      isNumber
+      isNumber,
     }
   },
 })

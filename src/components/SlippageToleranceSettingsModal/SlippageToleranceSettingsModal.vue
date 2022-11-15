@@ -8,9 +8,7 @@
         </Text>
       </div>
       <div class="l0k-swap-slippage-tolerance-settings-set">
-        <Button class="auto" @click="onAuto" :type="'primary'">
-          Auto
-        </Button>
+        <Button class="auto" @click="onAuto" :type="'primary'"> Auto </Button>
         <div class="btn" @click="typedValue = 0.1">0.1 %</div>
         <div class="btn" @click="typedValue = 0.5">0.5 %</div>
         <div class="btn" @click="typedValue = 1">1 %</div>
@@ -19,9 +17,7 @@
         </div>
       </div>
       <div class="l0k-swap-slippage-tolerance-settings-confirm">
-        <Button @click="onConfirm" :type="'primary'" bold :disabled="isDisabled">
-          Confirm
-        </Button>
+        <Button @click="onConfirm" :type="'primary'" bold :disabled="isDisabled"> Confirm </Button>
       </div>
     </div>
   </Modal>
@@ -32,8 +28,9 @@ import { computed, defineComponent, ref, watch } from 'vue'
 import Modal from '../Modal/Modal.vue'
 import Text from '../Text/Text.vue'
 import Button from '../Button/Button'
-import { INITIAL_SWAP_ALLOWED_SLIPPAGE } from '../../constants/index'
-import { useModalStore, useSlippageToleranceSettingsStore, RISKY_SLIPPAGE_LOW, MAX_SLIPPAGE } from '../../state'
+import { useModalStateManager } from '../../providers/ModalStateProvider/hooks'
+import { useSlippageToleranceStateManager } from '../../providers/SlippageToleranceProvider/hooks'
+import { INITIAL_SWAP_ALLOWED_SLIPPAGE, MAX_SLIPPAGE, RISKY_SLIPPAGE_LOW } from '../../providers/SlippageToleranceProvider/model'
 
 export default defineComponent({
   components: {
@@ -42,10 +39,8 @@ export default defineComponent({
     Button,
   },
   setup() {
-    const modalStore = useModalStore()
-    const slippageToleranceSettingsStore = useSlippageToleranceSettingsStore()
-    const currentSet = computed(() => slippageToleranceSettingsStore.currentSet)
-    const slippageTolerances = computed(() => slippageToleranceSettingsStore.slippageTolerances)
+    const [{ showSlippageToleranceSettingsModal }, toggleModal] = useModalStateManager()
+    const [{ swapSlippageTolerance }, toggleSlippageTolerance] = useSlippageToleranceStateManager()
 
     const typedValue = ref<number | string>('')
 
@@ -55,9 +50,9 @@ export default defineComponent({
     })
 
     const showModal = computed({
-      get: () => modalStore.showSlippageToleranceSettingsModal,
+      get: () => showSlippageToleranceSettingsModal.value,
       set(newValue) {
-        modalStore.toggleSlippageToleranceSettingsModal(newValue)
+        toggleModal('slippageToleranceSettings', newValue)
       },
     })
     const isDisabled = computed(() => {
@@ -71,18 +66,15 @@ export default defineComponent({
       return false
     })
 
-    watch([currentSet, slippageTolerances], () => {
-      if (!currentSet.value) {
-        return
-      }
-      typedValue.value = slippageTolerances.value[currentSet.value] / 100
+    watch([swapSlippageTolerance], () => {
+      typedValue.value = swapSlippageTolerance.value / 100
     })
 
     const onAuto = () => {
       typedValue.value = INITIAL_SWAP_ALLOWED_SLIPPAGE / 100
     }
     const onConfirm = () => {
-      slippageToleranceSettingsStore.updateSlippageTolerance(parsedTypedValue.value)
+      toggleSlippageTolerance(parsedTypedValue.value)
       showModal.value = false
     }
 

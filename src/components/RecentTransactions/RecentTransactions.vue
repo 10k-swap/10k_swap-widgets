@@ -2,14 +2,10 @@
   <div class="l0k-swap-recent-transactions-wrap">
     <template v-if="sortdTransactions.length">
       <div class="l0k-swap-recent-transactions-head">
-        <Text>
-          Recent Transactions
-        </Text>
+        <Text> Recent Transactions </Text>
         <div class="clear" @click="clearTransactions">
           <ClearIcon width="15px" />
-          <Text>
-            Clear All
-          </Text>
+          <Text> Clear All </Text>
         </div>
       </div>
       <div class="l0k-swap-recent-transactions">
@@ -29,9 +25,7 @@
       </div>
     </template>
     <template v-else>
-      <Text :color="'secondary-text'" :size="'small'">
-        your transaction will appear here...
-      </Text>
+      <Text :color="'secondary-text'" :size="'small'"> your transaction will appear here... </Text>
     </template>
   </div>
 </template>

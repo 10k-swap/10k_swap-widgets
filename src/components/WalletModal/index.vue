@@ -4,7 +4,7 @@
       <div class="discoverys">
         <div class="discovery" v-for="item in discovery" :key="item.id" @click="onWalletSelect(item)">
           <img :src="item.icon" />
-          <Text bold :color="'secondary-text'"> {{ isInstalled(item.id) ? item.name : t('wallet_modal.install', { wallet: item.name }) }} </Text>
+          <Text bold :color="'secondary-text'"> {{ isInstalled(item.id) ? item.name : `Install ${item.name}` }} </Text>
         </div>
       </div>
       <!-- <div class="card">
@@ -20,10 +20,10 @@ import Modal from '../Modal/Modal.vue'
 import discovery from './discovery'
 import Text from '../Text/Text.vue'
 import getBrowserName from '../../utils/getBrowserName'
-import { useModalStore } from '../../state'
 import { useStarknet } from '../../starknet/providers/starknet'
 import { WalletProvider } from './types'
 import useConnector from '../../hooks/useConnector'
+import { useModalStateManager } from '../../providers/ModalStateProvider/hooks'
 
 const normalId = (id: string) => id.replace(/\s|-/g, '').toLowerCase()
 
@@ -33,7 +33,7 @@ export default defineComponent({
     Text,
   },
   setup() {
-    const store = useModalStore()
+    const [{ showWalletModal }, toggleModal] = useModalStateManager()
 
     const {
       state: { connectors },
@@ -41,9 +41,9 @@ export default defineComponent({
     const { onConnect } = useConnector()
 
     const showModal = computed({
-      get: () => store.showWalletModal,
+      get: () => showWalletModal.value,
       set(newValue) {
-        store.toggleWalletModal(newValue)
+        toggleModal('wallet', newValue)
       },
     })
 

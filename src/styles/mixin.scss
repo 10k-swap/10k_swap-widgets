@@ -42,3 +42,10 @@
     @content;
   }
 }
+
+@mixin absolute-pos($t: 0, $r: 0, $b: 0, $l: 0) {
+  top: $t;
+  right: $r;
+  bottom: $b;
+  left: $l;
+}

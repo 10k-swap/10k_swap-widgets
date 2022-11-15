@@ -5,14 +5,13 @@
     </template>
     <div class="l0k-swap-transaction-waitting-modal">
       <WaittingIcon width="64px" />
-      <Text class="label" bold>
-        connect a wallet
-      </Text>
+      <Text class="label" bold> connect a wallet </Text>
       <Text class="desc" :size="'small'" :color="'secondary-text'">
         {{ desc }}
       </Text>
       <Text :size="'small'" :color="'secondary-text'">
-        By connecting a wallet,you agree to 10K Swap Labs’ Terms of Service and acknowledge that you have read and understand the 10K Swap Protocol Disclaimer.
+        By connecting a wallet,you agree to 10K Swap Labs’ Terms of Service and acknowledge that you have read and understand the 10K Swap Protocol
+        Disclaimer.
       </Text>
     </div>
   </Modal>

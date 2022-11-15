@@ -20,7 +20,7 @@ import { computed, defineComponent } from 'vue'
 import Modal from '../Modal/Modal.vue'
 import Text from '../Text/Text.vue'
 import { LoadingIcon } from '../Svg'
-import { useModalStore } from '../../state'
+import { useModalStateManager } from '../../providers/ModalStateProvider/hooks'
 
 export default defineComponent({
   components: {
@@ -29,12 +29,12 @@ export default defineComponent({
     Text,
   },
   setup() {
-    const store = useModalStore()
+    const [{ showConnectingModal }, toggleModal] = useModalStateManager()
 
     const showModal = computed({
-      get: () => store.showConnectingModal,
+      get: () => showConnectingModal.value,
       set(newValue) {
-        store.toggleConnectingModal(newValue)
+        toggleModal('connecting', newValue)
       },
     })
 

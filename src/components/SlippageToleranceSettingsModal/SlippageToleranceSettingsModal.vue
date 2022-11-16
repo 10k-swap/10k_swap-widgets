@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch } from 'vue'
+import { computed, defineComponent, onMounted, ref, watch } from 'vue'
 import Modal from '../Modal/Modal.vue'
 import Text from '../Text/Text.vue'
 import Button from '../Button/Button'
@@ -77,6 +77,10 @@ export default defineComponent({
       toggleSlippageTolerance(parsedTypedValue.value)
       showModal.value = false
     }
+
+    onMounted(() => {
+      typedValue.value = swapSlippageTolerance.value / 100
+    })
 
     return {
       showModal,

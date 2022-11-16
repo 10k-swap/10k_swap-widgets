@@ -6,15 +6,15 @@
     "type": "git",
     "url": "git+https://github.com/10k-swap/-10k_swap-widgets.git"
   },
-  "author": "",
+  "author": "https://github.com/breeze98",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/10k-swap/-10k_swap-widgets/issues"
   },
   "homepage": "https://github.com/10k-swap/-10k_swap-widgets#readme",
-  "main": "src/index.ts",
-  "module": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "lib/index.mjs",
+  "module": "lib/index.umd.js",
+  "types": "lib/index.d.ts",
   "source": "./example/main.ts",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
@@ -26,9 +26,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
-    "dist"
+    "lib"
   ],
-  "keywords": [],
+  "keywords": [
+    "swap",
+    "starknet"
+  ],
   "dependencies": {
     "@argent/get-starknet": "^3.0",
     "@ethersproject/units": "^5.6.1",

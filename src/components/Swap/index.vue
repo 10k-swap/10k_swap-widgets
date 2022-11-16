@@ -1,9 +1,12 @@
 <template>
   <div class="l0k-swap-wrapper">
-    <!-- <Page class="" :title="'Swap'"> -->
-    <!-- <template v-slot:head-right>
-      <SettingIcon class="setting" width="17px" @click="onSetting" />
-    </template> -->
+    <div class="l0k-swap-header">
+      <Text class="l0k-swap-title" bold> Swap </Text>
+      <div class="l0k-swap-account" @click="showAccount" v-if="account">
+        {{ account && shortenAddress(account) }}
+      </div>
+      <SettingIcon class="l0k-swap-setup" width="17px" @click="onSetting" />
+    </div>
     <div class="l0k-swap-swap-content">
       <CurrencyInputPanel
         :value="formattedAmounts[Field.INPUT]"
@@ -34,7 +37,7 @@
         </div>
       </div>
       <div class="swap">
-        <Button :type="'primary'" :size="'large'" bold v-if="!account" @click="openWalletModal"> Connect </Button>
+        <Button :type="'primary'" :size="'large'" bold v-if="!account" @click="openWalletModal"> Connect wallet to swap </Button>
         <Button :type="'primary'" :size="'large'" bold disabled v-else-if="noTrade && userHasSpecifiedInputOutput"> Insufficient Liquidity </Button>
         <Button
           :type="'primary'"
@@ -49,7 +52,6 @@
       </div>
     </div>
   </div>
-  <!-- </Page> -->
   <ConfirmModal :show="swapState.showConfirm" :trade="tradeToConfirm" @swap="handleSwap" @dismiss="onReset" />
   <WaittingModal :show="swapState.attemptingTxn" :desc="summary" @dismiss="onReset" />
   <RejectedModal :show="showRejectedModal" @dismiss="onReset" />
@@ -60,7 +62,6 @@
 import { computed, defineComponent, reactive, ref } from 'vue'
 import Text from '../../components/Text/Text.vue'
 import Button from '../../components/Button/Button'
-// import Page from '../../components/Page/Page.vue'
 import CurrencyInputPanel from '../../components/CurrencyInputPanel/index.vue'
 import TradePrice from '../TradePrice/TradePrice.vue'
 import AdvancedSwapDetails from '../AdvancedSwapDetails/AdvancedSwapDetails.vue'
@@ -73,7 +74,7 @@ import { Token, Trade, JSBI, TokenAmount } from 'l0k_swap-sdk'
 import useSwapCallback from '../../hooks/useSwapCallback'
 import { useStarknet } from '../../starknet/providers/starknet'
 import useSwapSummary from '../../hooks/useSwapSummary'
-import { getDeductGasMaxAmount } from '../../utils'
+import { getDeductGasMaxAmount, shortenAddress } from '../../utils'
 import { useModalStateManager, useOpenWalletModal } from '../../providers/ModalStateProvider/hooks'
 import { useUserSwapSlippageTolerance } from '../../providers/SlippageToleranceProvider/hooks'
 import { useDerivedSwapInfo, useSwapActionHandlers, useSwapState } from '../../providers/SwapStateProvider/hooks'
@@ -83,8 +84,7 @@ export default defineComponent({
   components: {
     Text,
     Button,
-    // Page,
-    // SettingIcon,
+    SettingIcon,
     CurrencyInputPanel,
     SwitchIcon,
     LoadingIcon,
@@ -171,6 +171,10 @@ export default defineComponent({
       tradeToConfirm.value = v2Trade.value
     }
 
+    const showAccount = () => {
+      toggleModal('account', true)
+    }
+
     const handleSwap = () => {
       if (!swapCallbacks.value.callback) {
         return
@@ -239,6 +243,8 @@ export default defineComponent({
       handleTypeInput,
       handleTypeOutput,
       handleSwap,
+      shortenAddress,
+      showAccount,
     }
   },
 })
@@ -248,15 +254,27 @@ export default defineComponent({
 @import '../../styles/index.scss';
 
 .l0k-swap-wrapper {
-  margin-top: 28px;
+  border-radius: 20px;
+  background-color: hsl(220, 23%, 97.5%);
 
-  .setting {
-    cursor: pointer;
+  .l0k-swap-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 16px 10px 16px;
+    .l0k-swap-account {
+      display: flex;
+      justify-content: flex-end;
+      flex: 1;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    .l0k-swap-setup {
+      cursor: pointer;
+    }
   }
 
   .l0k-swap-swap-content {
     padding: 0 20px 20px 20px;
-
     .switch-wrap {
       position: relative;
       height: 12px;
@@ -288,10 +306,6 @@ export default defineComponent({
       display: flex;
       margin-top: 20px;
     }
-  }
-
-  @include mobile {
-    margin-top: 5px;
   }
 }
 </style>

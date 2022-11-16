@@ -2,6 +2,7 @@ node_modules
 demo
 .parcel-cache
 dist
+stats.html
 lib
 .idea
 .vscode

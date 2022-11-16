@@ -12,10 +12,17 @@
     "url": "https://github.com/10k-swap/-10k_swap-widgets/issues"
   },
   "homepage": "https://github.com/10k-swap/-10k_swap-widgets#readme",
-  "main": "lib/index.mjs",
-  "module": "lib/index.umd.js",
   "types": "lib/index.d.ts",
   "source": "./example/main.ts",
+  "type": "module",
+  "main": "./lib/index.umd.cjs",
+  "module": "./lib/index.mjs",
+  "exports": {
+    ".": {
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.umd.cjs"
+    }
+  },
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "serve": "cd ./example && npm run dev",
@@ -60,9 +67,11 @@
     "prettier": "^2.7.1",
     "sass": "^1.42.1",
     "typescript": "^4.4.3",
+    "rollup-plugin-visualizer": "^5.8.3",
     "vite": "^3.2.3",
     "vite-plugin-dts": "^1.7.1",
     "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-imp": "^2.3.1",
     "vue": "^3.2.16",
     "vue-eslint-parser": "^9.0.3",
     "vue-tsc": "^0.38.4"

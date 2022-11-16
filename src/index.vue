@@ -17,6 +17,5 @@ export default defineComponent({
     Providers,
     Swap,
   },
-  setup() {},
 })
 </script>

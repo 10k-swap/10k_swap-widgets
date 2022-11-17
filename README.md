@@ -27,8 +27,11 @@ To start the example:
 ```bash
 git clone https://github.com/10k-swap/10k_swap-widgets.git
 yarn          # install dependencies
-yarn serve    # run the development server
+cd ./example
+yarn dev    # run the development server
 # or
+git clone https://github.com/10k-swap/10k_swap-widgets.git
 npm           # install dependencies
-npm run serve # run the development server
+cd ./example
+npm run dev # run the development server
 ```

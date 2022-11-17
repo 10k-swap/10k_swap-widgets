@@ -2,7 +2,6 @@ node_modules
 demo
 dist
 stats.html
-lib
 
 .idea
 .vscode

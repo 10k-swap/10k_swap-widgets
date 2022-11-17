@@ -1,5 +1,6 @@
 import { PropType } from 'vue';
 import { Token, TokenAmount } from 'l0k_swap-sdk';
+import { Placement } from '../TokenSelector/TokenSelector.vue';
 declare const _sfc_main: import("vue").DefineComponent<{
     selectorDisabled: BooleanConstructor;
     token: {
@@ -17,6 +18,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
     selector: {
         default: boolean;
         type: BooleanConstructor;
+    };
+    placement: {
+        type: PropType<Placement>;
     };
     onMax: {
         type: PropType<(amount: TokenAmount | undefined) => void>;
@@ -47,6 +51,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
     selector: {
         default: boolean;
         type: BooleanConstructor;
+    };
+    placement: {
+        type: PropType<Placement>;
     };
     onMax: {
         type: PropType<(amount: TokenAmount | undefined) => void>;

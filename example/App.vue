@@ -6,7 +6,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import SwapWidget from '../src/index'
+import SwapWidget from '../lib/index'
+import '../lib/style.css'
 
 export default defineComponent({
   components: {

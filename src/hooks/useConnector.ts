@@ -61,9 +61,6 @@ export default function useConnector(): {
 
       nextTick(() => {
         toggleModal('connecting', false)
-        if (account.value) {
-          toggleModal('account', true)
-        }
       })
     } catch (error) {
       console.log('connect error', error)

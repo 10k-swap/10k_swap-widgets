@@ -1,5 +1,5 @@
 <template>
-  <Modal v-model="showModal" :title="'Account'" :top="160">
+  <Modal v-model="showModal" :title="'Account'">
     <div class="l0k-swap-account-modal-card">
       <div class="l0k-swap-account-modal-card-top">
         <Text color="secondary-text" size="small"> {{ `Connected with ${wallet}` }}</Text>
@@ -96,9 +96,9 @@ export default defineComponent({
 @import '../../styles/index.scss';
 
 .l0k-swap-account-modal-card {
-  padding: 16px;
+  padding: 15px;
   border-radius: 20px;
-  background: $color-bg-secondary;
+  background: $color-bg-plain;
 
   .l0k-swap-account-modal-card-top {
     display: flex;
@@ -110,7 +110,7 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 16px;
+    margin-top: 10px;
 
     .account {
       display: flex;

@@ -4,8 +4,8 @@
       <ModalHeader @dismiss="() => (showModal = false)" />
     </template>
     <div class="l0k-swap-transaction-rejected-modal">
-      <ErrorIcon width="64px" :color="'red'" />
-      <Text class="label" bold :color="'red'"> Transaction Rejected </Text>
+      <ErrorIcon width="64px" :color="'danger'" />
+      <Text class="label" bold :color="'danger'"> Transaction Rejected </Text>
       <Button class="dismiss" @click="showModal = false" plain bold> Dismiss </Button>
     </div>
   </Modal>

@@ -13,13 +13,13 @@
           <div class="svgs">
             <ScuccessIcon v-if="transaction.scuccess" :color="'primary'" width="16px" />
             <LoadingIcon v-else-if="transaction.loading" :color="'minor'" width="16px" />
-            <FailIcon v-else-if="transaction.fail" color="red" width="16px" />
+            <FailIcon v-else-if="transaction.fail" color="danger" width="16px" />
           </div>
           <a target="_blank" :href="chainId && getScanLink(chainId, transaction.transactionHash, 'transaction')">
             <Text class="text" :color="'secondary-text'" :size="isMobile ? 'mini' : 'small'">
               {{ transaction.metadata?.message }}
             </Text>
-            <ShareIcon class="share" :color="'transparent'" width="12px" />
+            <ShareIcon class="share" :color="'light'" width="12px" />
           </a>
         </div>
       </div>
@@ -72,12 +72,12 @@ export default defineComponent({
 <style lang="scss">
 @import '../../styles/index.scss';
 .l0k-swap-recent-transactions-wrap {
-  margin-top: 20px;
+  margin-top: 10px;
 
   .l0k-swap-recent-transactions-head {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
 
     .clear {
       display: flex;
@@ -103,7 +103,7 @@ export default defineComponent({
       background-color: transparent;
     }
     &::-webkit-scrollbar-thumb {
-      background: $color-bg-transparent;
+      background: $color-bg-light;
       border-radius: 4px;
     }
     .l0k-swap-recent-transaction {

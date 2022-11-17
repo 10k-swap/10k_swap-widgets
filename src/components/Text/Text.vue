@@ -51,24 +51,17 @@ $text-prefix: '#{$prefix}-text';
 $textColors: (
   'g-white': $color-white,
   'g-primary': $color-primary,
-  'g-red': $color-red,
-  'g-blue': $color-blue,
   'g-normal': $color-primary-text,
-  'g-orange': $color-orange,
+  'danger-text': $color-danger,
   'secondary-text': $color-secondary-text,
   'description-text': $color-description-text,
-  'transparent-text': $color-transparent-text,
+  'light-text': $color-light-text,
 );
-$textNames: 'g-red' 'g-blue' 'g-primary' 'g-white' 'g-normal' 'secondary-text' 'description-text' 'transparent-text' 'g-orange';
+$textNames: 'g-primary' 'g-white' 'g-normal' 'secondary-text' 'danger-text' 'description-text' 'light-text';
 
 .#{$text-prefix} {
   font-weight: 400;
   line-height: 24px;
-
-  &--large {
-    font-size: $font-size-lg;
-    line-height: 40px;
-  }
 
   &--md {
     font-size: $font-size-md;

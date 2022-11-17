@@ -2,25 +2,7 @@
   <div class="advanced-swap-details">
     <div class="cell">
       <Text class="label" :size="'mini'">
-        {{ isExactIn ? 'Expected Output' : 'Expected Input' }}
-      </Text>
-      <Text class="value" :size="'mini'" :color="'description-text'">
-        {{
-          isExactIn
-            ? `${trade?.outputAmount.toSignificant()} ${trade?.outputAmount.token.symbol}`
-            : `${trade?.inputAmount.toSignificant()} ${trade?.inputAmount.token.symbol}`
-        }}
-      </Text>
-    </div>
-    <div class="cell">
-      <Text class="label" :size="'mini'"> Price Impact </Text>
-      <Text class="value" :size="'mini'" :color="'description-text'">
-        {{ trade ? (trade?.priceImpact.lessThan(ONE_BIPS) ? '<0.01' : `${trade?.priceImpact.toFixed(2)}`) : '-' }}%
-      </Text>
-    </div>
-    <div class="cell">
-      <Text class="label" :size="'mini'">
-        {{ isExactIn ? `Minimun received after slippage (${allowedSlippage / 100})` : `Maximum sold after slippage (${allowedSlippage / 100})` }}
+        {{ isExactIn ? `Minimun received after slippage (${allowedSlippage / 100}%)` : `Maximum sold after slippage (${allowedSlippage / 100}%)` }}
       </Text>
       <Text class="value" :size="'mini'" :color="'description-text'">
         {{
@@ -72,12 +54,12 @@ export default defineComponent({
 
 <style lang="scss">
 .advanced-swap-details {
-  margin-top: 10px;
+  margin-top: 8px;
 
   .cell {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 
     &:last-child {
       margin-bottom: 0;

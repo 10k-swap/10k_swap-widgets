@@ -1,9 +1,9 @@
 <template>
-  <Modal v-model="showModal" :top="160" :title="`Confirm Swap`">
+  <Modal v-model="showModal" :title="`Confirm Swap`">
     <div class="l0k-swap-confirm-swap-modal">
       <div class="card">
         <Text :size="'large'" bold>
-          {{ trade?.inputAmount.toSignificant() }}
+          {{ trade?.inputAmount.toSignificant(6) }}
         </Text>
         <div class="token">
           <Text bold> {{ trade?.inputAmount.token.symbol }} </Text>
@@ -15,7 +15,7 @@
       </div>
       <div class="card">
         <Text :size="'large'" bold>
-          {{ trade?.outputAmount.toSignificant() }}
+          {{ trade?.outputAmount.toSignificant(6) }}
         </Text>
         <div class="token">
           <Text bold> {{ trade?.outputAmount.token.symbol }} </Text>
@@ -98,7 +98,7 @@ export default defineComponent({
     justify-content: space-between;
     height: 56px;
     padding: 0 20px;
-    background: $color-bg-secondary;
+    background: $color-bg-plain;
     border-radius: 20px;
 
     .token {

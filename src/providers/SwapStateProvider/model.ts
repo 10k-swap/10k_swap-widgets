@@ -33,6 +33,7 @@ export interface SwapActions {
   selectCurrency: ({ currencyId, field }: { currencyId: string; field: Field }) => void
   switchCurrencies: () => void
   typeInput: (field: Field, typedValue: string | number) => void
+  resetSwapState: () => void
 }
 
 export const INIT_SWAP_STATE = {

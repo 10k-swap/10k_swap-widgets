@@ -1,10 +1,10 @@
 <template>
-  <div class="l0k-swap-modal-container" ref="root" v-show="showModal" :class="containerClass">
+  <div class="l0k-swap-modal-container" v-show="showModal">
     <transition name="l0k-swap-modal-overlay-fade">
       <div class="l0k-swap-modal-overlay" v-show="shwoOverlay" :ref="(element) => onRef(element, 0)" @click="onOverlayClick" />
     </transition>
-    <Transition :name="transition" @after-enter="onTransitionEnd" @after-leave="onTransitionEnd">
-      <div class="l0k-swap-modal-content" v-show="showModalContent" :ref="(element) => onRef(element, 1)" :class="[transition]" :style="contentStyle">
+    <Transition :name="'l0k-swap-slide-left'" @after-enter="onTransitionEnd" @after-leave="onTransitionEnd">
+      <div class="l0k-swap-modal-content" v-show="showModalContent" :ref="(element) => onRef(element, 1)" :class="['l0k-swap-slide-left']">
         <slot name="header" v-if="slots.header" />
         <ModalHeader v-else :title="title" @dismiss="onDismiss" />
         <div class="l0k-swap-modal-wrap"><slot /></div>
@@ -18,7 +18,7 @@ import { defineComponent, ref, toRefs, watch, onMounted, ComponentPublicInstance
 import ModalHeader from './ModalHeader.vue'
 import Transition from '../Transition/Transition.vue'
 import { props } from './index'
-import { useContainerClasses, useContentStyle, usePreventScrollEventHandler } from './hooks'
+import { usePreventScrollEventHandler } from './hooks'
 
 export default defineComponent({
   components: {
@@ -30,18 +30,14 @@ export default defineComponent({
   },
   emits: ['update:modelValue', 'show', 'hide'],
   setup(props, { emit, slots }) {
-    const { modelValue, preventScroll, maskClosable, position, hasOverlay, appendToBody, top } = toRefs(props)
+    const { modelValue, preventScroll, maskClosable, hasOverlay } = toRefs(props)
 
     const showModal = ref(false)
     const showModalContent = ref(false)
     const isAnimation = ref(false)
     const elements = ref<Element[]>([])
-    const root = ref<Node>()
 
     const shwoOverlay = computed(() => hasOverlay.value && showModalContent.value)
-
-    const containerClass = useContainerClasses(position)
-    const contentStyle = useContentStyle(top)
 
     const preventScrollEvent = usePreventScrollEventHandler(elements, preventScroll)
 
@@ -100,23 +96,16 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      if (appendToBody.value && root.value) {
-        document.body.appendChild(root.value)
-      }
-
       if (modelValue.value) {
         onShowModal()
       }
     })
 
     return {
-      root,
       slots,
       elements,
       showModal,
       shwoOverlay,
-      contentStyle,
-      containerClass,
       showModalContent,
 
       onOverlayClick,
@@ -131,50 +120,30 @@ export default defineComponent({
 <style lang="scss">
 @import '../../styles/mixin.scss';
 @import '../../styles/index.scss';
+
 .l0k-swap-modal-container {
   @include absolute-pos();
-  position: fixed;
+  position: absolute;
   display: flex;
   pointer-events: none;
   z-index: 999;
-  &.center {
-    justify-content: center;
-  }
-  &.top {
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-  &.bottom {
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-  &.left {
-    justify-content: flex-start;
-  }
-  &.right {
-    justify-content: flex-end;
-  }
-
+  justify-content: flex-end;
+  margin: 0.25em;
   .l0k-swap-modal-content {
     position: relative;
     pointer-events: auto;
     z-index: 2;
-    max-width: 100%;
-    max-height: 100%;
-    overflow: auto;
-    width: 480px;
-    height: fit-content;
-    background: $color-white;
-    border-radius: 20px;
-    margin-bottom: 50px;
     overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+
+    background: $color-bg-secondary;
     @include no-scrollbar;
 
-    @include mobile {
-      width: 335px;
-    }
     .l0k-swap-modal-wrap {
       padding: 0 20px 20px 20px;
+      box-sizing: border-box;
     }
   }
 }

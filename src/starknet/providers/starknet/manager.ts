@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, reactive, Ref, ref } from 'vue'
+import { onMounted, onUnmounted, reactive, Ref, toRaw } from 'vue'
 import { Provider, AccountInterface, ProviderInterface } from 'starknet'
 import { StarknetMethods, StarknetState } from './model'
 import { Connector, InjectedConnector } from '../../connectors'
@@ -12,28 +12,29 @@ export function useStarknetManager(
   userDefaultProvider: Ref<ProviderInterface | undefined>,
   connectors: Ref<Connector<InjectedConnectorOptions>[]>
 ): StarknetMethods & { state: StarknetState } {
+  const connectorId = ConnectorStorageManager.get()
+
   const state = reactive<{
     library: ProviderInterface | AccountInterface | Provider
     connectors: Connector<InjectedConnectorOptions>[]
+    connector: Connector | undefined
     account: string | undefined
     chainId: ChainId | undefined
     error: Error | undefined
   }>({
     library: userDefaultProvider.value ? userDefaultProvider.value : defaultProvider,
     connectors: connectors.value,
+    connector: connectorId ? new InjectedConnector({ id: connectorId }) : undefined,
     account: undefined,
     error: undefined,
     chainId: (userDefaultProvider.value ? userDefaultProvider.value : defaultProvider).chainId,
   })
 
-  const connectorId = ConnectorStorageManager.get()
-  const currentConnector = ref<Connector | undefined>(connectorId ? new InjectedConnector({ id: connectorId }) : undefined)
-
   const _getConnectorInfo = async () => {
-    if (!currentConnector.value) {
+    if (!state.connector) {
       return
     }
-    const connector = currentConnector.value
+    const connector = toRaw(state.connector)
     const account = await connector.connect()
     if ((state.account && !isEqualAddress(account.address, state.account)) || state.chainId !== account.chainId) {
       state.account = account.address
@@ -54,7 +55,7 @@ export function useStarknetManager(
     }
     try {
       const account = await connector.connect()
-      currentConnector.value = connector
+      state.connector = connector
       state.account = account.address
       state.library = account
       state.chainId = account.chainId
@@ -73,10 +74,10 @@ export function useStarknetManager(
   }
 
   const disconnect = () => {
-    if (!currentConnector.value) {
+    if (!state.connector) {
       return
     }
-    currentConnector.value.disconnect().then(
+    state.connector.disconnect().then(
       () => {
         ConnectorStorageManager.set(null)
         state.account = undefined
@@ -91,9 +92,10 @@ export function useStarknetManager(
   }
 
   onUnmounted(() => {
-    if (currentConnector.value) {
-      currentConnector.value.off('accountsChanged', _getConnectorInfo)
-      currentConnector.value.off('networkChanged', _getConnectorInfo)
+    const connector = toRaw(state.connector)
+    if (connector) {
+      connector.off('accountsChanged', _getConnectorInfo)
+      connector.off('networkChanged', _getConnectorInfo)
     }
   })
 

@@ -34,6 +34,7 @@ export function useSwapActionHandlers(): {
   onCurrencySelection: (field: Field, currency: Token) => void
   onSwitchTokens: () => void
   onUserInput: (field: Field, typedValue: string | number) => void
+  resetSwapState: () => void
 } {
   const actions = inject<SwapActions>(SwapMethodsSymbol)
 
@@ -52,10 +53,15 @@ export function useSwapActionHandlers(): {
     actions?.typeInput(field, typedValue)
   }
 
+  const resetSwapState = () => {
+    actions?.resetSwapState()
+  }
+
   return {
     onSwitchTokens,
     onCurrencySelection,
     onUserInput,
+    resetSwapState,
   }
 }
 

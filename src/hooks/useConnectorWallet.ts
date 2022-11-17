@@ -1,6 +1,5 @@
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, toRaw } from 'vue'
 import { useStarknet } from '../starknet/providers/starknet'
-import ConnectorStorageManager from '../starknet/utils/ConnectorStorageManager'
 
 const wallets: { [k: string]: string } = {
   argentx: 'Argent X',
@@ -9,14 +8,15 @@ const wallets: { [k: string]: string } = {
 
 export default function useConnectorWallet() {
   const {
-    state: { account },
+    state: { account, connector },
   } = useStarknet()
 
   const wallet = ref<string | null>(null)
 
   const getConnector = () => {
-    if (account.value) {
-      const id = ConnectorStorageManager.get()
+    const cconnectorRaw = toRaw(connector.value)
+    if (cconnectorRaw && cconnectorRaw.available()) {
+      const id = cconnectorRaw.id()
       wallet.value = id ? wallets[id.replace(/-|\s/g, '').toLowerCase()] ?? id : null
     }
   }

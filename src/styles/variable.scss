@@ -2,31 +2,31 @@ $prefix: 'l0k-swap';
 
 $mobile-size: 768px;
 
+$content-width: var(--10k-swap-content-width);
+
 // colors
-$color-primary: #3bc6a5;
-$color-red: #cc1010;
-$color-blue: #2069d7;
-$color-orange: #fe5b00;
-$color-yellow: #fcda4c;
+$color-primary: var(--10k-swap-color-primary);
+$color-danger: var(--10k-swap-color-danger);
 $color-white: #fff;
 $color-black: #000;
 
 // text-colors
-$color-primary-text: #111111;
-$color-secondary-text: #666666;
-$color-description-text: #999999;
-$color-transparent-text: #ccc;
+$color-primary-text: var(--10k-swap-color-primary-text);
+$color-secondary-text: var(--10k-swap-color-secondary-text);
+$color-description-text: var(--10k-swap-color-description-text);
+$color-light-text: var(--10k-swap-color-light-text);
 
 // bg-colors
-$color-bg-streak: #eaeaea;
-$color-bg-secondary: #f2f2f2;
-$color-bg-transparent: #ccc;
+$color-bg: var(--10k-swap-color-bg);
+$color-bg-plain: var(--10k-swap-color-bg-plain);
+$color-bg-secondary: var(--10k-swap-color-bg-secondary);
+$color-bg-secondary-hover: var(--10k-swap-color-bg-secondary-hover);
+$color-bg-light: var(--10k-swap-color-bg-light);
 
-$color-overlay: rgba($color-primary-text, 0.4);
+$color-overlay: var(--10k-swap-color-overlay);
 
 // fonts
-$font-size-mini: 12px;
-$font-size-sm: 14px;
-$font-size-normal: 16px;
-$font-size-md: 20px;
-$font-size-lg: 28px;
+$font-size-mini: var(--10k-swap-font-size-mini);
+$font-size-sm: var(--10k-swap-font-size-sm);
+$font-size-normal: var(--10k-swap-font-size-normal);
+$font-size-md: var(--10k-swap-font-size-md);

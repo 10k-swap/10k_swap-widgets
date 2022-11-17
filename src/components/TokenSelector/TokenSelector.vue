@@ -162,7 +162,7 @@ export default defineComponent({
       opacity: 0.7;
     }
     &:hover:not(.active):not(.disabled) {
-      background: rgba($color: $color-bg-secondary, $alpha: 0.5);
+      background: $color-bg-secondary-hover;
     }
 
     .text {

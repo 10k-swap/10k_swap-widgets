@@ -51,10 +51,10 @@ $button-prefix: '#{$prefix}-button';
   &--secondary {
     color: $color-primary-text;
     background-color: $color-white;
-    border: 1px solid $color-bg-transparent;
+    border: 1px solid $color-bg-light;
     &:disabled {
       border: 0;
-      background-color: $color-bg-transparent;
+      background-color: $color-bg-light;
       color: $color-white;
       opacity: 1;
     }
@@ -68,24 +68,18 @@ $button-prefix: '#{$prefix}-button';
 
   &--text {
     color: $color-primary-text;
-    background-color: transparent;
+    background-color: light;
     border: 0;
   }
 
   &--danger {
-    color: $color-red;
+    color: $color-danger;
     background-color: $color-white;
-    border: $color-red solid 2px;
-  }
-
-  &--warning {
-    color: $color-blue;
-    background-color: $color-white;
-    border: $color-blue solid 1px;
+    border: $color-danger solid 2px;
   }
 
   &--plain {
-    background-color: $color-bg-streak;
+    background-color: $color-bg-plain;
     color: $color-black;
     border: none;
 
@@ -94,11 +88,7 @@ $button-prefix: '#{$prefix}-button';
     }
 
     &.#{$button-prefix}--danger {
-      color: $color-red;
-    }
-
-    &.#{$button-prefix}--warning {
-      color: $color-blue;
+      color: $color-danger;
     }
   }
 

@@ -1,7 +1,7 @@
 <template>
   <Modal v-model="showModal">
     <div class="l0k-swap-connect-reject-modal">
-      <Text class="title" bold :size="'md'" :color="'red'"> Error Connectir </Text>
+      <Text class="title" bold :size="'md'" :color="'danger'"> Error Connectir </Text>
       <div class="card">
         <Text :size="'small'" :color="'secondary-text'">
           The connection attempt failed.Please click try again and follow the steps to connect in your wallet.

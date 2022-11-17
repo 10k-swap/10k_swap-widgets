@@ -101,6 +101,8 @@ export default defineComponent({
   display: flex;
   align-items: center;
   flex-direction: column;
+  max-width: 440px;
+  margin: 0 auto;
 
   .l0k-swap-slippage-tolerance-settings-tips {
     div {
@@ -136,7 +138,7 @@ export default defineComponent({
       width: 145px;
       box-sizing: border-box;
       height: 40px;
-      background: $color-bg-secondary;
+      background: $color-white;
       border-radius: 20px;
       overflow: hidden;
       padding-right: 40px;
@@ -153,7 +155,7 @@ export default defineComponent({
 
       .input {
         width: 100%;
-        background: $color-bg-secondary;
+        background: transparent;
         font-size: $font-size-sm;
         height: 40px;
         border: 0;

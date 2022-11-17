@@ -7,7 +7,7 @@
       </div>
       <SettingIcon class="l0k-swap-setup" width="17px" @click="onSetting" />
     </div>
-    <div class="l0k-swap-swap-content">
+    <div class="l0k-swap-content">
       <CurrencyInputPanel
         :value="formattedAmounts[Field.INPUT]"
         :token="currencies[Field.INPUT]"
@@ -52,14 +52,14 @@
       </div>
     </div>
   </div>
-  <ConfirmModal :show="swapState.showConfirm" :trade="tradeToConfirm" @swap="handleSwap" @dismiss="onReset" />
-  <WaittingModal :show="swapState.attemptingTxn" :desc="summary" @dismiss="onReset" />
+  <ConfirmModal :show="swapState.showConfirm" :trade="tradeToConfirm" @swap="handleSwap" />
+  <WaittingModal :show="swapState.attemptingTxn" :desc="summary" @dismiss="swapState.attemptingTxn = false" />
   <RejectedModal :show="showRejectedModal" @dismiss="onReset" />
   <ScuccessModal :show="!!swapState.txHash" :tx="swapState.txHash" @dismiss="onReset" />
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref } from 'vue'
+import { computed, defineComponent, reactive, ref, watch } from 'vue'
 import Text from '../../components/Text/Text.vue'
 import Button from '../../components/Button/Button'
 import CurrencyInputPanel from '../../components/CurrencyInputPanel/index.vue'
@@ -100,13 +100,13 @@ export default defineComponent({
     const [, toggleModal] = useModalStateManager()
     const userSwapSlippageTolerance = useUserSwapSlippageTolerance()
     const {
-      state: { account },
+      state: { account, chainId },
     } = useStarknet()
 
     // swap state
     const { independentField, typedValue } = useSwapState()
     const { v2Trade, currencyBalances, parsedAmount, currencies, inputError: swapInputError } = useDerivedSwapInfo()
-    const { onSwitchTokens, onCurrencySelection, onUserInput } = useSwapActionHandlers()
+    const { onSwitchTokens, onCurrencySelection, onUserInput, resetSwapState } = useSwapActionHandlers()
     const isValid = computed(() => !swapInputError.value)
     const dependentField = computed(() => (independentField.value === Field.INPUT ? Field.OUTPUT : Field.INPUT))
 
@@ -181,7 +181,6 @@ export default defineComponent({
       }
       swapState.showConfirm = false
       swapState.attemptingTxn = true
-
       swapCallbacks.value
         .callback()
         .then((hash) => {
@@ -212,6 +211,10 @@ export default defineComponent({
         onUserInput(Field.INPUT, amount.toExact())
       }
     }
+
+    watch(chainId, () => {
+      resetSwapState()
+    })
 
     return {
       swapState,
@@ -250,13 +253,10 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../styles/index.scss';
 
 .l0k-swap-wrapper {
-  border-radius: 20px;
-  background-color: hsl(220, 23%, 97.5%);
-
   .l0k-swap-header {
     display: flex;
     justify-content: space-between;
@@ -273,8 +273,8 @@ export default defineComponent({
     }
   }
 
-  .l0k-swap-swap-content {
-    padding: 0 20px 20px 20px;
+  .l0k-swap-content {
+    padding: 0 15px 15px 15px;
     .switch-wrap {
       position: relative;
       height: 12px;
@@ -290,7 +290,7 @@ export default defineComponent({
     }
 
     .swap-info {
-      margin-top: 13px;
+      margin-top: 8px;
 
       .loading {
         display: flex;
@@ -304,7 +304,7 @@ export default defineComponent({
 
     .swap {
       display: flex;
-      margin-top: 20px;
+      margin-top: 10px;
     }
   }
 }

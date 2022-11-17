@@ -87,7 +87,7 @@ export default defineComponent({
       display: flex;
       align-items: center;
       padding: 10px;
-      border: 2px solid #eaeaea;
+      border: 2px solid $color-bg-plain;
       border-radius: 12px;
       margin-bottom: 8px;
       cursor: pointer;
@@ -97,7 +97,7 @@ export default defineComponent({
       img {
         width: 24px;
         height: 24px;
-        border: 1px solid #f2f2f2;
+        border: 1px solid $color-bg-secondary;
         border-radius: 8px;
         box-sizing: border-box;
         margin-right: 4px;

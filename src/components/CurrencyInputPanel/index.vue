@@ -1,5 +1,5 @@
 <template>
-  <div class="l0k-swap-currency-input-panel" :class="classes">
+  <div class="l0k-swap-currency-input-panel">
     <div class="inputs">
       <input type="text" :value="typedValue" @input="onInput" placeholder="0.0" pattern="^[0-9]*[.,]?[0-9]*$" />
       <TokenSelector v-if="selector" class="token-select" :token="token ?? null" :otherToken="otherToken ?? null" @select="onSelect" />
@@ -43,10 +43,6 @@ export default defineComponent({
       default: true,
       type: Boolean,
     },
-    size: {
-      default: 'normal',
-      type: String as PropType<'small' | 'normal'>,
-    },
     onMax: {
       type: Function as PropType<(amount: TokenAmount | undefined) => void>,
     },
@@ -57,13 +53,13 @@ export default defineComponent({
     Text,
   },
   emits: ['token-select', 'input'],
-  setup(props, context) {
-    const { value, currencyBalance, size } = toRefs(props)
+  setup(props, { emit, slots }) {
+    const { value, currencyBalance } = toRefs(props)
 
     const typedValue = computed({
       get: () => value.value,
       set(newValue) {
-        context.emit('input', newValue)
+        emit('input', newValue)
       },
     })
 
@@ -80,7 +76,7 @@ export default defineComponent({
     }
 
     const onSelect = (token: Token) => {
-      context.emit('token-select', token)
+      emit('token-select', token)
     }
 
     return {
@@ -88,11 +84,8 @@ export default defineComponent({
       onInput,
       isNull,
 
-      slots: context.slots,
+      slots,
       typedValue,
-      classes: computed(() => ({
-        'l0k-swap-currency-input-panel-small': size.value === 'small',
-      })),
       currencyBalance,
     }
   },
@@ -121,7 +114,7 @@ export default defineComponent({
       outline: none;
 
       &::placeholder {
-        color: rgba($color: $color-transparent-text, $alpha: 1);
+        color: $color-light-text;
       }
 
       &:hover {
@@ -162,24 +155,6 @@ export default defineComponent({
       font-size: $font-size-mini;
       color: $color-white;
       cursor: pointer;
-    }
-  }
-
-  &-small {
-    padding: 8px 10px;
-
-    .inputs {
-      input {
-        width: 60%;
-        font-size: 22px;
-        @include mobile {
-          width: 40%;
-        }
-      }
-    }
-
-    .balance {
-      margin-top: 4px;
     }
   }
 }

@@ -1,5 +1,7 @@
 <template>
-  <Index />
+  <div class="wrapper">
+    <Index />
+  </div>
 </template>
 
 <script lang="ts">
@@ -14,4 +16,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.wrapper {
+}
+</style>

@@ -1,7 +1,9 @@
 <template>
   <Providers>
-    <Modals />
-    <Swap />
+    <div class="l0k-swap">
+      <Swap />
+      <Modals />
+    </div>
   </Providers>
 </template>
 
@@ -19,3 +21,13 @@ export default defineComponent({
   },
 })
 </script>
+<style lang="scss">
+@import './styles/index.scss';
+.l0k-swap {
+  position: relative;
+  width: $content-width;
+  min-height: 325px;
+  border-radius: 20px;
+  background-color: $color-bg;
+}
+</style>

@@ -1,10 +1,4 @@
-import { isNumber } from 'lodash'
-import { computed, Ref } from 'vue'
-import { Position } from '.'
-
-export function useContainerClasses(position: Ref<Position>) {
-  return computed(() => [position.value])
-}
+import { Ref } from 'vue'
 
 export function usePreventScrollEventHandler(elements: Ref<Element[]>, preventScroll: Ref<boolean>) {
   const preventDefault = (e: Event) => e.preventDefault()
@@ -17,8 +11,4 @@ export function usePreventScrollEventHandler(elements: Ref<Element[]>, preventSc
       }
     })
   }
-}
-
-export function useContentStyle(top: Ref<string | number>) {
-  return computed(() => ({ marginTop: isNumber(top.value) ? `${top.value}px` : top.value }))
 }

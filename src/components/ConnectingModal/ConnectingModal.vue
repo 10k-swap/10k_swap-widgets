@@ -53,6 +53,7 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 50px;
     transform: translateY(-6px);
 
     svg {

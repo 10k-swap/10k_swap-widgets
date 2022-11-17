@@ -6,6 +6,7 @@ export declare function useSwapActionHandlers(): {
     onCurrencySelection: (field: Field, currency: Token) => void;
     onSwitchTokens: () => void;
     onUserInput: (field: Field, typedValue: string | number) => void;
+    resetSwapState: () => void;
 };
 export declare function useDerivedSwapInfo(): {
     currencies: ComputedRef<{

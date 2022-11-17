@@ -27,6 +27,7 @@ export interface SwapActions {
     }) => void;
     switchCurrencies: () => void;
     typeInput: (field: Field, typedValue: string | number) => void;
+    resetSwapState: () => void;
 }
 export declare const INIT_SWAP_STATE: {
     independentField: Field;

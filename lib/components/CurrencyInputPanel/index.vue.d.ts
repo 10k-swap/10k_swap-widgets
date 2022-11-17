@@ -18,10 +18,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: boolean;
         type: BooleanConstructor;
     };
-    size: {
-        default: string;
-        type: PropType<"normal" | "small">;
-    };
     onMax: {
         type: PropType<(amount: TokenAmount | undefined) => void>;
     };
@@ -33,9 +29,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
         [name: string]: import("vue").Slot | undefined;
     }>;
     typedValue: import("vue").WritableComputedRef<string | number | undefined>;
-    classes: import("vue").ComputedRef<{
-        'l0k-swap-currency-input-panel-small': boolean;
-    }>;
     currencyBalance: import("vue").Ref<TokenAmount | null | undefined>;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "token-select")[], "input" | "token-select", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     selectorDisabled: BooleanConstructor;
@@ -55,10 +48,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: boolean;
         type: BooleanConstructor;
     };
-    size: {
-        default: string;
-        type: PropType<"normal" | "small">;
-    };
     onMax: {
         type: PropType<(amount: TokenAmount | undefined) => void>;
     };
@@ -66,7 +55,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
     onInput?: ((...args: any[]) => any) | undefined;
     "onToken-select"?: ((...args: any[]) => any) | undefined;
 }, {
-    size: "normal" | "small";
     selectorDisabled: boolean;
     selector: boolean;
 }>;

@@ -1,5 +1,5 @@
 import { CSSProperties, PropType } from 'vue';
-export declare type SvgColor = 'normal' | 'primary' | 'white' | 'secondary' | 'red' | 'minor' | 'transparent' | 'none' | 'blue';
+export declare type SvgColor = 'normal' | 'primary' | 'white' | 'secondary' | 'danger' | 'minor' | 'light' | 'none';
 export declare const SvgProps: {
     color: {
         type: PropType<SvgColor>;

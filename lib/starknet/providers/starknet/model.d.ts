@@ -6,6 +6,7 @@ export interface StarknetState {
     account: string | undefined;
     library: ProviderInterface | AccountInterface;
     connectors: Connector<InjectedConnectorOptions>[];
+    connector: Connector | undefined;
     chainId: ChainId | undefined;
     error: Error | undefined;
 }

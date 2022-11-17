@@ -4,7 +4,7 @@ This repository contains the 10kswap swap widgets code.
 
 The Swap Widget bundles the whole swapping experience into a single Vue3 component that developers can easily embed in their app with one line of code.
 
-![swap widget screenshot](https://github.com/10k-swap/10k_swap-widgets/widget-screenshot.jpg)
+![swap widget screenshot](https://github.com/10k-swap/10k_swap-widgets/blob/main/widget-screenshot.jpg)
 
 You can customize the theme (colors, fonts, and more) to match the style of your application.
 

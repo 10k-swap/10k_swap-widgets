@@ -32,7 +32,7 @@ npm i --save https://github.com/10k-swap/10k_swap-widgets.git#main
 <script>
   import { defineComponent } from "vue";
   import SwapWidget from "10k_swap-widgets";
-  import  "../node_modules/10k_swap-widgets/lib/style.css";
+  import "../node_modules/10k_swap-widgets/lib/style.css";
 
   export default defineComponent({
     components: {

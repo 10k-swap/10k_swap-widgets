@@ -1,16 +1,16 @@
 <template>
   <div class="wrapper">
-    <Index />
+    <SwapWidget />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Index from '../src/index'
+import SwapWidget from '../src/index'
 
 export default defineComponent({
   components: {
-    Index,
+    SwapWidget,
   },
 })
 </script>

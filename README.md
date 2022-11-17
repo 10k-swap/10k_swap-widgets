@@ -12,12 +12,33 @@ You can customize the theme (colors, fonts, and more) to match the style of your
 
 Install the widgets library via `npm` or `yarn`.
 
-```js
+```bash
 yarn add https://github.com/10k-swap/10k_swap-widgets.git#main
 ```
 
-```js
+```bash
 npm i --save https://github.com/10k-swap/10k_swap-widgets.git#main
+```
+
+## Usage
+
+### Vue environment
+
+```html
+<template>
+  <SwapWidget />
+</template>
+
+<script>
+  import { defineComponent } from "vue";
+  import SwapWidget from "10k_swap-widgets";
+
+  export default defineComponent({
+    components: {
+      SwapWidget,
+    },
+  });
+</script>
 ```
 
 ## Example
@@ -25,12 +46,12 @@ npm i --save https://github.com/10k-swap/10k_swap-widgets.git#main
 To start the example:
 
 ```bash
-git clone https://github.com/10k-swap/10k_swap-widgets.git
+git clone https://github.com/10k-swap/10k_swap-widgets.git # clone
+
 yarn          # install dependencies
 cd ./example
 yarn dev    # run the development server
 # or
-git clone https://github.com/10k-swap/10k_swap-widgets.git
 npm           # install dependencies
 cd ./example
 npm run dev # run the development server

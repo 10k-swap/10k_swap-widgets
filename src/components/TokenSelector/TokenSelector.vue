@@ -1,5 +1,5 @@
 <template>
-  <Popper :interactive="false" @close:popper="show = false" @open:popper="show = true">
+  <Popper :interactive="false" @close:popper="show = false" @open:popper="show = true" :placement="placement">
     <div class="l0k-swap-select-token--button" role="button">
       <template v-if="current">
         <TokenLogo class="l0k-swap-select-token--button-logo" :token="current" />
@@ -39,6 +39,23 @@ import { ArrowDownIcon } from '../Svg'
 import { Token } from 'l0k_swap-sdk'
 import { useStarknet } from '../../starknet/providers/starknet'
 
+export type Placement =
+  | 'auto'
+  | 'auto-start'
+  | 'auto-end'
+  | 'top'
+  | 'top-start'
+  | 'top-end'
+  | 'bottom'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'right'
+  | 'right-start'
+  | 'right-end'
+  | 'left'
+  | 'left-start'
+  | 'left-end'
+
 export default defineComponent({
   props: {
     token: {
@@ -46,6 +63,9 @@ export default defineComponent({
     },
     otherToken: {
       type: Object as PropType<Token | null>,
+    },
+    placement: {
+      type: String as PropType<Placement>,
     },
   },
   components: {
@@ -94,6 +114,13 @@ export default defineComponent({
 <style lang="scss">
 @import '../../styles/index.scss';
 
+.popper[data-popper-placement='bottom'] {
+  @include arrow('top');
+}
+.popper[data-popper-placement='left'] {
+  @include arrow('right');
+}
+
 .l0k-swap-select-token--button {
   display: flex;
   align-items: center;
@@ -133,7 +160,7 @@ export default defineComponent({
 
 .l0k-swap-select-token--tokens {
   width: 136px;
-  max-height: 264px;
+  max-height: 170px;
   background: $color-white;
   box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.16);
   border-radius: 20px;

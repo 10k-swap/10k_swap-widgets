@@ -23,13 +23,14 @@ export default defineComponent({
 </script>
 <style lang="scss">
 @import './styles/global.scss';
-
 @import './styles/index.scss';
+
 .l0k-swap {
   position: relative;
   width: $content-width;
   min-height: 325px;
   border-radius: 20px;
   background-color: $color-bg;
+  overflow: hidden;
 }
 </style>

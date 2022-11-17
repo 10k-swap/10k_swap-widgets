@@ -2,7 +2,14 @@
   <div class="l0k-swap-currency-input-panel">
     <div class="inputs">
       <input type="text" :value="typedValue" @input="onInput" placeholder="0.0" pattern="^[0-9]*[.,]?[0-9]*$" />
-      <TokenSelector v-if="selector" class="token-select" :token="token ?? null" :otherToken="otherToken ?? null" @select="onSelect" />
+      <TokenSelector
+        v-if="selector"
+        class="token-select"
+        :token="token ?? null"
+        :otherToken="otherToken ?? null"
+        :placement="placement"
+        @select="onSelect"
+      />
       <div class="token" v-else>
         <template v-if="slots.token">
           <slot name="token"></slot>
@@ -25,7 +32,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType, toRefs } from 'vue'
 import { Token, TokenAmount } from 'l0k_swap-sdk'
-import TokenSelector from '../TokenSelector/TokenSelector.vue'
+import TokenSelector, { Placement } from '../TokenSelector/TokenSelector.vue'
 import TokenLogo from '../TokenLogo/TokenLogo'
 import Text from '../Text/Text.vue'
 import { isNull } from 'lodash'
@@ -42,6 +49,9 @@ export default defineComponent({
     selector: {
       default: true,
       type: Boolean,
+    },
+    placement: {
+      type: String as PropType<Placement>,
     },
     onMax: {
       type: Function as PropType<(amount: TokenAmount | undefined) => void>,

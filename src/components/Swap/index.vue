@@ -23,6 +23,7 @@
         :value="formattedAmounts[Field.OUTPUT]"
         :token="currencies[Field.OUTPUT]"
         :currencyBalance="currencyBalances[Field.OUTPUT]"
+        :placement="'left'"
         @token-select="onOutputSelect"
         @input="handleTypeOutput"
       />

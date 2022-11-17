@@ -101,7 +101,7 @@ export default defineComponent({
   display: flex;
   align-items: center;
   flex-direction: column;
-  max-width: 440px;
+  max-width: 400px;
   margin: 0 auto;
 
   .l0k-swap-slippage-tolerance-settings-tips {
@@ -111,8 +111,9 @@ export default defineComponent({
   }
 
   .l0k-swap-slippage-tolerance-settings-set {
-    display: flex;
-    /* justify-content: space-between; */
+    display: grid;
+    grid-template-columns: 90px repeat(3, calc((100% - 90px) / 3));
+    grid-template-rows: 40px 52px;
     width: 100%;
     margin-top: 20px;
 
@@ -124,7 +125,7 @@ export default defineComponent({
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 60px;
+      width: calc(100% - 8px);
       height: 40px;
       border: 2px solid $color-primary;
       border-radius: 20px;
@@ -132,16 +133,23 @@ export default defineComponent({
       margin-right: 8px;
       font-size: $font-size-sm;
       cursor: pointer;
+      &:last-child {
+        margin-right: 0;
+      }
     }
     .input-wrap {
       position: relative;
-      width: 145px;
+      display: flex;
+      grid-column: 1/5;
+      grid-row: 2/2;
       box-sizing: border-box;
       height: 40px;
       background: $color-white;
       border-radius: 20px;
       overflow: hidden;
       padding-right: 40px;
+      margin-top: 12px;
+      width: 100%;
 
       &::after {
         content: '%';
@@ -167,19 +175,6 @@ export default defineComponent({
         &:focus {
           border: 0;
         }
-      }
-    }
-
-    @include mobile {
-      display: grid;
-      grid-template-columns: 90px 68px 68px 60px;
-      grid-template-rows: 40px 52px;
-      .input-wrap {
-        display: flex;
-        grid-column: 1/5;
-        grid-row: 2/2;
-        margin-top: 12px;
-        width: 100%;
       }
     }
   }

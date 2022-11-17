@@ -14,15 +14,35 @@
   }
 }
 
-@mixin mobile {
-  @media screen and (max-width: $mobile-size) {
-    @content;
-  }
-}
-
 @mixin absolute-pos($t: 0, $r: 0, $b: 0, $l: 0) {
   top: $t;
   right: $r;
   bottom: $b;
   left: $l;
+}
+
+@mixin arrow($position) {
+  position: relative;
+  &::after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    @if ($position == 'top') {
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-bottom: 6px solid $color-white;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+    }
+    @if ($position == 'right') {
+      top: 50%;
+      right: -5px;
+      transform: translateY(-50%);
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 6px solid $color-white;
+    }
+  }
 }

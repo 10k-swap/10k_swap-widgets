@@ -9,7 +9,7 @@
         <div class="account">
           <UserIcon />
           <Text size="md" bold>
-            {{ account && shortenAddress(account) }}
+            {{ account && shortenAddress(account, 3) }}
           </Text>
         </div>
         <div class="copy" v-if="!copySuccess" id="l0k-swap-account-modal-copy-address" :data-clipboard-text="account">

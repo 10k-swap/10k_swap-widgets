@@ -20,7 +20,7 @@ export default defineComponent({
   --10k-swap-width-content: 330px;
 
   // colors
-  /* --10k-swap-color-primary: #2069d7; */
+  --10k-swap-color-primary: #2069d7;
   --10k-swap-color-danger: #cc1010;
 
   // text colors

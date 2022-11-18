@@ -63,6 +63,11 @@ $textNames: 'g-primary' 'g-white' 'g-normal' 'secondary-text' 'danger-text' 'des
   font-weight: 400;
   line-height: 24px;
 
+  &--large {
+    font-size: $font-size-lg;
+    line-height: 40px;
+  }
+
   &--md {
     font-size: $font-size-md;
   }

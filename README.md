@@ -66,7 +66,7 @@ The swap widget has a fixed height of 370px and a default width of 370px. You ca
 <style>
 .wrapper {
   /* overwrite the width to 330px */
-  --10k-swap-content-width: 330px;
+  --10k-swap-width-content: 330px;
 }
 </style>
 ```
@@ -77,13 +77,13 @@ The swap widget has a fixed height of 370px and a default width of 370px. You ca
 
 | CSS variable                            | Example value                       |
 | --------------------------------------- | ----------------------------------- |
-| `--10k-swap-content-width`              | 350px                               |
+| `--10k-swap-width-content`              | 350px                               |
 | `--10k-swap-color-primary`              | #3bc6a5                             |
 | `--10k-swap-color-danger`               | #cc1010                             |
-| `--10k-swap-color-text-primary`         | #111                                |
-| `--10k-swap-color-text-secondary`       | #666                                |
-| `--10k-swap-color-text-description`     | #999                                |
-| `--10k-swap-color-text-light`           | #ccc                                |
+| `--10k-swap-font-color-primary`         | #111                                |
+| `--10k-swap-font-color-secondary`       | #666                                |
+| `--10k-swap-font-color-description`     | #999                                |
+| `--10k-swap-font-color-light`           | #ccc                                |
 | `--10k-swap-color-bg`                   | hsl(220, 23%, 97.5%)                |
 | `--10k-swap-color-bg-light`             | #ccc                                |
 | `--10k-swap-color-bg-plain`             | #eaeaea                             |

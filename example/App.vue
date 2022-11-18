@@ -17,17 +17,17 @@ export default defineComponent({
 
 <style lang="scss">
 .wrapper {
-  --10k-swap-content-width: 330px;
+  --10k-swap-width-content: 330px;
 
   // colors
   /* --10k-swap-color-primary: #2069d7; */
   --10k-swap-color-danger: #cc1010;
 
   // text colors
-  --10k-swap-color-primary-text: #111;
-  --10k-swap-color-secondary-text: #666;
-  --10k-swap-color-description-text: #999;
-  --10k-swap-color-light-text: #ccc;
+  --10k-swap-font-color-primary: #111;
+  --10k-swap-font-color-secondary: #666;
+  --10k-swap-font-color-description: #999;
+  --10k-swap-font-color-light: #ccc;
 
   // bgs
   --10k-swap-color-bg: hsl(220, 23%, 97.5%);

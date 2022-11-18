@@ -1,6 +1,6 @@
 $prefix: 'l0k-swap';
 
-$content-width: var(--10k-swap-content-width);
+$content-width: var(--10k-swap-width-content);
 
 // colors
 $color-primary: var(--10k-swap-color-primary);
@@ -9,10 +9,10 @@ $color-white: #fff;
 $color-black: #000;
 
 // text-colors
-$color-primary-text: var(--10k-swap-color-text-primary);
-$color-secondary-text: var(--10k-swap-color-text-secondary);
-$color-description-text: var(--10k-swap-color-text-description);
-$color-light-text: var(--10k-swap-color-text-light);
+$color-primary-text: var(--10k-swap-font-color-primary);
+$color-secondary-text: var(--10k-swap-font-color-secondary);
+$color-description-text: var(--10k-swap-font-color-description);
+$color-light-text: var(--10k-swap-font-color-light);
 
 // bg-colors
 $color-bg: var(--10k-swap-color-bg);

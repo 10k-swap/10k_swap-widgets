@@ -32,7 +32,7 @@ npm i --save https://github.com/10k-swap/10k_swap-widgets.git#main
 <script>
   import { defineComponent } from "vue";
   import SwapWidget from "10k_swap-widgets";
-  import  "../node_modules/10k_swap-widgets/lib/style.css";
+  import "../node_modules/10k_swap-widgets/lib/style.css";
 
   export default defineComponent({
     components: {
@@ -41,6 +41,58 @@ npm i --save https://github.com/10k-swap/10k_swap-widgets.git#main
   });
 </script>
 ```
+
+## Customizing the Width
+
+The swap widget has a fixed height of 370px and a default width of 370px. You cannot modify the height of the widget. You can modify the width up to a minimum width of 300px.
+
+```html
+<template>
+  <div class="wrapper">
+    <SwapWidget />
+  </div>
+</template>
+<script>
+  import { defineComponent } from "vue";
+  import SwapWidget from "10k_swap-widgets";
+  import "../node_modules/10k_swap-widgets/lib/style.css";
+
+  export default defineComponent({
+    components: {
+      SwapWidget,
+    },
+  });
+</script>
+<style>
+.wrapper {
+  /* overwrite the width to 330px */
+  --10k-swap-content-width: 330px;
+}
+</style>
+```
+
+## CSS variables
+
+`SwapWidget` only comes with some barebones styling by default, but it also uses a list of predefined CSS variables. You can overwrite these variables to suit your needs.
+
+| CSS variable                            | Example value                       |
+| --------------------------------------- | ----------------------------------- |
+| `--10k-swap-content-width`              | 350px                               |
+| `--10k-swap-color-primary`              | #3bc6a5                             |
+| `--10k-swap-color-danger`               | #cc1010                             |
+| `--10k-swap-color-primary-text`         | #111                                |
+| `--10k-swap-color-secondary-text`       | #666                                |
+| `--10k-swap-color-description-text`     | #999                                |
+| `--10k-swap-color-light-text`           | #ccc                                |
+| `--10k-swap-color-bg`                   | hsl(220, 23%, 97.5%)                |
+| `--10k-swap-color-bg-light`             | #ccc                                |
+| `--10k-swap-color-bg-plain`             | #eaeaea                             |
+| `--10k-swap-color-bg-secondary`         | #f2f2f2                             |
+| `--10k-swap-color-bg-secondary-hover`   | rgba(242, 242, 242, 0.5)            |
+| `--10k-swap-font-size-mini`             | 12px                                |
+| `--10k-swap-font-size-sm`               | 14px                                |
+| `--10k-swap-font-size-normal`           | 16px                                |
+| `--10k-swap-font-size-md`               | 20px                                |
 
 ## Example
 

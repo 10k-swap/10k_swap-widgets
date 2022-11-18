@@ -80,10 +80,10 @@ The swap widget has a fixed height of 370px and a default width of 370px. You ca
 | `--10k-swap-content-width`              | 350px                               |
 | `--10k-swap-color-primary`              | #3bc6a5                             |
 | `--10k-swap-color-danger`               | #cc1010                             |
-| `--10k-swap-color-primary-text`         | #111                                |
-| `--10k-swap-color-secondary-text`       | #666                                |
-| `--10k-swap-color-description-text`     | #999                                |
-| `--10k-swap-color-light-text`           | #ccc                                |
+| `--10k-swap-color-text-primary`         | #111                                |
+| `--10k-swap-color-text-secondary`       | #666                                |
+| `--10k-swap-color-text-description`     | #999                                |
+| `--10k-swap-color-text-light`           | #ccc                                |
 | `--10k-swap-color-bg`                   | hsl(220, 23%, 97.5%)                |
 | `--10k-swap-color-bg-light`             | #ccc                                |
 | `--10k-swap-color-bg-plain`             | #eaeaea                             |

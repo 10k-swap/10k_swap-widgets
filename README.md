@@ -93,6 +93,7 @@ The swap widget has a fixed height of 370px and a default width of 370px. You ca
 | `--10k-swap-font-size-sm`               | 14px                                |
 | `--10k-swap-font-size-normal`           | 16px                                |
 | `--10k-swap-font-size-md`               | 20px                                |
+| `--10k-swap-font-size-lg`               | 28px                                |
 
 ## Example
 

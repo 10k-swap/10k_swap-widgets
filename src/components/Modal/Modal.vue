@@ -1,7 +1,7 @@
 <template>
   <div class="l0k-swap-modal-container" v-show="showModal">
     <transition name="l0k-swap-modal-overlay-fade">
-      <div class="l0k-swap-modal-overlay" v-show="shwoOverlay" :ref="(element) => onRef(element, 0)" @click="onOverlayClick" />
+      <div class="l0k-swap-modal-overlay" v-show="showOverlay" :ref="(element) => onRef(element, 0)" @click="onOverlayClick" />
     </transition>
     <Transition :name="'l0k-swap-slide-left'" @after-enter="onTransitionEnd" @after-leave="onTransitionEnd">
       <div class="l0k-swap-modal-content" v-show="showModalContent" :ref="(element) => onRef(element, 1)" :class="['l0k-swap-slide-left']">
@@ -37,7 +37,7 @@ export default defineComponent({
     const isAnimation = ref(false)
     const elements = ref<Element[]>([])
 
-    const shwoOverlay = computed(() => hasOverlay.value && showModalContent.value)
+    const showOverlay = computed(() => hasOverlay.value && showModalContent.value)
 
     const preventScrollEvent = usePreventScrollEventHandler(elements, preventScroll)
 
@@ -105,7 +105,7 @@ export default defineComponent({
       slots,
       elements,
       showModal,
-      shwoOverlay,
+      showOverlay,
       showModalContent,
 
       onOverlayClick,
